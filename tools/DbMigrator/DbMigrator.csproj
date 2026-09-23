@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Asf.DbMigrator</RootNamespace>
+    <!-- لا تفعّل InvariantGlobalization: سياقات البرنامج تستعمل ثقافة en-us -->
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <!-- نفس إصدار EF Core المستخدم في البرنامج المنشور (8.0.30) حتى تتطابق الأنواع -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.30" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.30" />
+  </ItemGroup>
+
+  <!-- سياق الهوية يعتمد على Microsoft.Extensions.Identity.Stores الموجود في إطار ASP.NET Core -->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>

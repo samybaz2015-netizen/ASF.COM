@@ -1,0 +1,490 @@
+.day-leave-approved {
+  background-color: #22c55e33 !important;
+}
+
+.day-leave-pending {
+  background-color: #facc1533 !important;
+}
+
+.day-leave-rejected {
+  background-color: rgb(248, 3, 3) !important;
+}
+
+.fc-daygrid-day-frame {
+  min-height: 100%;
+}
+
+.leave-approved {
+  background-color: #22c55e!important;
+  border-color: #22c55e !important;
+  color: #14532d !important;
+}
+
+.leave-pending {
+  background-color: #856b0333 !important;
+  border-color: #facc15 !important;
+  color: #713f12 !important;
+}
+
+.leave-rejected {
+  background-color: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #7f1d1d !important;
+}
+/* ===================================================
+   EmployeeLeaveCalendar.css
+   مبني على مكوّن LeaveEmployees
+   =================================================== */
+
+/* ─── Layout Wrapper ─────────────────────────────── */
+.leave-calendar-wrapper {
+  direction: rtl;
+  font-family: "Cairo", "Tajawal", sans-serif;
+  padding: 1.5rem;
+  background: var(--color-background-primary, #fff);
+  border-radius: 12px;
+  border: 0.5px solid var(--color-border-tertiary, #e5e7eb);
+  min-width: 0;
+  /* overflow: hidden; */
+  margin: 50px;
+}
+
+/* ─── Month Navigation ───────────────────────────── */
+.month-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.month-nav-label {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-text-primary, #111);
+  min-width: 130px;
+  text-align: center;
+}
+
+.month-nav-btn {
+  background: var(--color-background-secondary, #f9fafb);
+  border: 0.5px solid var(--color-border-tertiary, #e5e7eb);
+  border-radius: 8px;
+  padding: 4px 12px;
+  cursor: pointer;
+  color: var(--color-text-primary, #111);
+  font-size: 18px;
+  line-height: 1;
+  transition: background 0.15s;
+  user-select: none;
+}
+
+.month-nav-btn:hover {
+  background: var(--color-background-tertiary, #f3f4f6);
+}
+
+.month-nav-btn:active {
+  transform: scale(0.96);
+}
+
+/* ─── Legend ─────────────────────────────────────── */
+.leave-legend {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--color-text-secondary, #6b7280);
+  flex-wrap: wrap;
+}
+
+.leave-legend span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legend-dot.approved {
+  background: rgba(34, 197, 94, 0.55);
+  border: 1.5px solid #16a34a;
+}
+
+.legend-dot.pending {
+  background: rgba(250, 204, 21, 0.65);
+  border: 1.5px solid #ca8a04;
+}
+
+.legend-dot.rejected {
+  background: rgba(239, 68, 68, 0.55);
+  border: 1.5px solid #dc2626;
+}
+
+/* ─── Table Scroll Wrapper ───────────────────────── */
+.leave-calendar-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  border: 0.5px solid var(--color-border-tertiary, #e5e7eb);
+  width: 100%;
+}
+
+/* ─── Main Table ─────────────────────────────────── */
+.leave-calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  direction: rtl;
+  min-width: 700px;
+}
+
+.leave-calendar-table th,
+.leave-calendar-table td {
+  border: 0.5px solid var(--color-border-tertiary, #e5e7eb);
+  text-align: center;
+  padding: 6px 4px;
+  min-width: 30px;
+}
+
+/* ─── Table Head ─────────────────────────────────── */
+.leave-calendar-table thead th {
+  background: var(--color-background-secondary, #f9fafb);
+  color: var(--color-text-secondary, #6b7280);
+  font-weight: 600;
+  font-size: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.leave-calendar-table thead th.weekend-col {
+  opacity: 0.4;
+}
+
+/* ─── Name & Balance Columns ─────────────────────── */
+.name-header {
+  text-align: right !important;
+  padding: 6px 14px !important;
+  white-space: nowrap;
+  min-width: 130px;
+  font-size: 12px;
+  position: sticky;
+  right: 0;
+  background: var(--color-background-secondary, #f9fafb);
+  z-index: 2;
+  
+}
+
+.balance-header {
+  white-space: nowrap;
+  font-size: 11px !important;
+  min-width: 70px;
+}
+
+/* ─── Table Body Rows ────────────────────────────── */
+.leave-calendar-table tbody tr {
+  transition: background 0.12s;
+}
+
+.leave-calendar-table tbody tr:hover {
+  background: var(--color-background-secondary, #f9fafb);
+}
+
+/* ─── Name Cell ──────────────────────────────────── */
+.name-cell {
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--color-text-primary, #111);
+  padding: 18px 28px !important;
+  text-align: right !important;
+  white-space: nowrap;
+  cursor: pointer;
+  position: sticky;
+  right: 0;
+  background: var(--color-background-primary, #fff);
+  transition: color 0.12s;
+}
+
+.leave-calendar-table tbody tr:hover .name-cell {
+  background: var(--color-background-secondary, #f9fafb);
+}
+
+.name-cell:hover {
+  color: #185FA5;
+  text-decoration: underline;
+}
+
+/* ─── Balance Cell ───────────────────────────────── */
+.balance-cell {
+  color: var(--color-text-secondary, #6b7280);
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 70px;
+}
+
+/* ─── Day Cells — Leave Status ───────────────────── */
+.day-approved {
+  background: rgba(34, 197, 94, 0.55) !important;
+  border: 1.5px solid #16a34a !important;
+}
+
+.day-pending {
+  background: rgba(250, 204, 21, 0.65) !important;
+  border: 1.5px solid #ca8a04 !important;
+}
+
+.day-rejected {
+  background: rgba(239, 68, 68, 0.55) !important;
+  border: 1.5px solid #dc2626 !important;
+}
+
+/* Weekend day cells */
+.weekend-day {
+  opacity: 0.4;
+}
+
+/* ─── FullCalendar Day Backgrounds (if used) ─────── */
+.day-leave-approved {
+  background-color: rgba(34, 197, 94, 0.2) !important;
+}
+
+.day-leave-pending {
+  background-color: rgba(250, 204, 21, 0.25) !important;
+}
+
+.day-leave-rejected {
+  background-color: rgba(239, 68, 68, 0.18) !important;
+}
+
+.fc-daygrid-day-frame {
+  min-height: 100%;
+}
+
+/* ─── FullCalendar Event Badges (if used) ────────── */
+.leave-approved {
+  background-color: #22c55e !important;
+  border-color: #22c55e !important;
+  color: #14532d !important;
+}
+
+.leave-pending {
+  background-color: rgba(250, 204, 21, 0.4) !important;
+  border-color: #facc15 !important;
+  color: #713f12 !important;
+}
+
+.leave-rejected {
+  background-color: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #7f1d1d !important;
+}
+
+/* ─── Empty State ────────────────────────────────── */
+.leave-calendar-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--color-text-secondary, #6b7280);
+  font-size: 14px;
+}
+
+/* ─── Loading Skeleton ───────────────────────────── */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+
+.skeleton-row td {
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+  background: var(--color-background-secondary, #f3f4f6) !important;
+}
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .leave-calendar-wrapper {
+    padding: 1rem;
+    border-radius: 0;
+  }
+
+  .leave-calendar-table {
+    font-size: 11px;
+  }
+
+  .name-cell,
+  .name-header {
+    min-width: 90px;
+    padding: 6px 8px !important;
+    font-size: 11px;
+  }
+
+  .month-nav-label {
+    font-size: 13px;
+    min-width: 110px;
+  }
+}
+/* ─── Modal Overlay ──────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Modal Box ──────────────────────────────────── */
+.modal-box {
+  background: var(--color-background-primary, #fff);
+  border-radius: 14px;
+  border: 0.5px solid var(--color-border-tertiary, #e5e7eb);
+  padding: 1.5rem;
+  min-width: 320px;
+  max-width: 420px;
+  width: 90%;
+  direction: rtl;
+  position: relative;
+  animation: slideUp 0.18s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--color-text-secondary, #6b7280);
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.12s;
+}
+
+.modal-close:hover {
+  background: var(--color-background-secondary, #f3f4f6);
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary, #111);
+  margin: 0 0 1rem;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid var(--color-border-tertiary, #e5e7eb);
+}
+
+/* ─── Modal Rows ─────────────────────────────────── */
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 0.5px solid var(--color-border-tertiary, #f3f4f6);
+  font-size: 13px;
+}
+
+.modal-row:last-of-type {
+  border-bottom: none;
+}
+
+.modal-label {
+  color: var(--color-text-secondary, #6b7280);
+  font-weight: 500;
+}
+
+.modal-value {
+  color: var(--color-text-primary, #111);
+}
+
+.modal-link {
+  color: #185FA5;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.modal-link:hover {
+  text-decoration: underline;
+}
+
+/* ─── Status Badge ───────────────────────────────── */
+.modal-status {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.modal-status.status-approved {
+  background: rgba(34, 197, 94, 0.15);
+  color: #15803d;
+  border: 0.5px solid #22c55e;
+}
+
+.modal-status.status-pending {
+  background: rgba(250, 204, 21, 0.2);
+  color: #92400e;
+  border: 0.5px solid #facc15;
+}
+
+.modal-status.status-rejected {
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+  border: 0.5px solid #ef4444;
+}
+
+/* ─── Action Buttons ─────────────────────────────── */
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 0.5px solid var(--color-border-tertiary, #e5e7eb);
+}
+
+.btn-approve,
+.btn-reject {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn-approve {
+  background: #16a34a;
+  color: #fff;
+}
+
+.btn-reject {
+  background: #dc2626;
+  color: #fff;
+}
+
+.btn-approve:hover,
+.btn-reject:hover {
+  opacity: 0.88;
+}
+
+.btn-approve:active,
+.btn-reject:active {
+  transform: scale(0.97);
+}

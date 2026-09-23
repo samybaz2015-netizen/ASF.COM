@@ -1,0 +1,98 @@
+.requests-table {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.requests-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.requests-table th,
+.requests-table td {
+  padding: 1rem;
+  text-align: right;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.requests-table th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.requests-table tr:hover {
+  background-color: #f8fafc;
+}
+
+.view-button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.view-button:hover {
+  background-color: #2563eb;
+}
+
+/* RTL Support */
+[dir="rtl"] .requests-table th,
+[dir="rtl"] .requests-table td {
+  text-align: right;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .requests-table {
+    font-size: 0.875rem;
+  }
+
+  .requests-table th,
+  .requests-table td {
+    padding: 0.75rem;
+  }
+
+  .view-button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .requests-table table {
+    background-color: #1e293b;
+  }
+
+  .requests-table th {
+    background-color: #334155;
+    color: #f1f5f9;
+  }
+
+  .requests-table th,
+  .requests-table td {
+    border-bottom-color: #475569;
+  }
+
+  .requests-table tr:hover {
+    background-color: #334155;
+  }
+
+  .view-button {
+    background-color: #3b82f6;
+  }
+
+  .view-button:hover {
+    background-color: #2563eb;
+  }
+} 

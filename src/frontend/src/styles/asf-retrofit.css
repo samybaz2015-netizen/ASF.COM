@@ -1,0 +1,354 @@
+/*
+  توحيد شكل الشاشات القائمة.
+
+  الشاشات القديمة بُنيت على مدى طويل بأيدٍ مختلفة، فتراكمت فيها ستة أحجام خط
+  وخمس استدارات للأزرار وثلاثة ارتفاعات للحقول في الصفحة الواحدة. إعادة كتابة
+  عشرين شاشة كانت ستأخذ وقتاً طويلاً وتكسر ما يعمل، فالتوحيد هنا يجري من
+  الأنماط: نفس رموز نظام التصميم تُطبَّق على الوسوم كما هي.
+
+  النطاق محصور في .asf-app-content — محتوى صفحات التطبيق — فلا يمسّ تسجيل
+  الدخول ولا الشريط العلوي ولا القائمة الجانبية.
+
+  والصفحات الجديدة تحمل .asf وتُستثنى، لأنها مبنيّة على النظام أصلاً ولا تحتاج
+  ترقيعاً فوقه.
+*/
+
+@import "./asf-ui.css";
+
+.asf-app-content {
+  font-family: "Cairo", Tahoma, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--asf-ink);
+}
+
+/* ─────────── سلّم الخط ─────────── */
+
+.asf-app-content h1 { font-size: 20px; }
+.asf-app-content h2 { font-size: 17px; }
+.asf-app-content h3 { font-size: 15px; }
+.asf-app-content h4 { font-size: 14px; }
+.asf-app-content h5,
+.asf-app-content h6 { font-size: 13px; }
+
+.asf-app-content h1,
+.asf-app-content h2,
+.asf-app-content h3,
+.asf-app-content h4 {
+  color: var(--asf-navy);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+/* الأحجام المتناثرة تُردّ إلى درجتين فقط: أساسي وصغير. */
+.asf-app-content .text-xs,
+.asf-app-content .text-\[9px\] { font-size: 11px; }
+.asf-app-content .text-sm { font-size: 12px; }
+.asf-app-content .text-base { font-size: 13px; }
+.asf-app-content .text-lg { font-size: 15px; }
+.asf-app-content .text-xl { font-size: 17px; }
+.asf-app-content .text-2xl { font-size: 20px; }
+
+/* ─────────── الجداول ─────────── */
+
+.asf-app-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  background: var(--asf-paper);
+}
+
+.asf-app-content thead th {
+  padding: 9px 10px;
+  border: 0;
+  border-bottom: 1px solid var(--asf-line);
+  background: var(--asf-navy);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* رؤوس بلون ثانوي في بعض الشاشات — تُوحَّد على الكحلي ويبقى الذهبي شريطاً. */
+.asf-app-content thead tr.bg-secondaryColor th,
+.asf-app-content thead th.bg-secondaryColor {
+  background: var(--asf-gold);
+}
+
+.asf-app-content tbody td {
+  padding: 8px 10px;
+  border: 0;
+  border-bottom: 1px solid var(--asf-line);
+  vertical-align: middle;
+}
+
+.asf-app-content tbody tr:hover {
+  background: var(--asf-tint);
+}
+
+/* الحدود الرمادية الصريحة تُلغى لصالح فواصل أفقية أهدأ. */
+.asf-app-content table.border,
+.asf-app-content table .border,
+.asf-app-content table .border-gray-300,
+.asf-app-content table .border-gray-200 {
+  border-color: transparent;
+}
+
+/* الجدول داخل إطار موحّد */
+.asf-app-content .overflow-x-auto,
+.asf-app-content .overflow-auto {
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-paper);
+}
+
+/* ─────────── الحقول ─────────── */
+
+/*
+  صنف النطاق مكرّر عمداً. أصناف Tailwind مثل py-2 تسبق هذه القواعد في الملف
+  النهائي لأن @import يُرفع إلى أعلاه، فتغلبها بالترتيب عند تساوي الأولوية.
+  تكرار الصنف يرفع الأولوية فيفوز المقاس الموحّد بلا !important.
+*/
+.asf-app-content.asf-app-content input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.asf-app-content.asf-app-content select {
+  height: 38px;
+  min-height: 38px;
+  padding-block: 0;
+  padding-inline: 10px;
+  border: 1px solid #d9dfea;
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-paper);
+  color: var(--asf-ink);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+  cursor: auto;
+}
+
+.asf-app-content.asf-app-content textarea {
+  min-height: 70px;
+  padding: 8px 10px;
+  border: 1px solid #d9dfea;
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-paper);
+  color: var(--asf-ink);
+  font-family: inherit;
+  font-size: 12px;
+  resize: vertical;
+}
+
+/* الحقول التي تحمل أيقونة داخلها تحتاج فسحة، فتُترك حشوتها الجانبية. */
+.asf-app-content.asf-app-content input.pl-10,
+.asf-app-content.asf-app-content select.pl-10 {
+  padding-inline-start: 38px;
+}
+
+.asf-app-content input:focus,
+.asf-app-content select:focus,
+.asf-app-content textarea:focus {
+  outline: none;
+  border-color: var(--asf-gold);
+  box-shadow: 0 0 0 3px rgba(188, 145, 92, 0.13);
+}
+
+.asf-app-content label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--asf-muted);
+}
+
+.asf-app-content input[type="checkbox"],
+.asf-app-content input[type="radio"] {
+  accent-color: var(--asf-navy);
+  cursor: pointer;
+}
+
+/* ─────────── الأزرار ─────────── */
+
+.asf-app-content button,
+.asf-app-content .btn,
+.asf-app-content a.button {
+  border-radius: var(--asf-radius-sm);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* الأزرار التي تحمل خلفية ولوناً تُعطى مقاساً واحداً وارتفاعاً موحّداً. */
+.asf-app-content button:not(.asf-icon-btn):not([class*="asf-"]) {
+  min-height: 34px;
+}
+
+/* أصناف قديمة متكرّرة تُردّ إلى اللوحة بدل ألوان متفرّقة. */
+.asf-app-content .view-button,
+.asf-app-content .export-button,
+.asf-app-content .close-modal-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid var(--asf-navy);
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.asf-app-content .view-button:hover,
+.asf-app-content .export-button:hover,
+.asf-app-content .close-modal-button:hover {
+  background: #35456e;
+  border-color: #35456e;
+}
+
+/* الأزرار الزرقاء الشاردة (Tailwind blue) تُردّ إلى الكحلي. */
+.asf-app-content .bg-blue-500,
+.asf-app-content .bg-blue-600,
+.asf-app-content .bg-blue-700 {
+  background-color: var(--asf-navy) !important;
+}
+
+.asf-app-content .bg-green-500,
+.asf-app-content .bg-green-600 {
+  background-color: var(--asf-ok) !important;
+}
+
+.asf-app-content .bg-red-500,
+.asf-app-content .bg-red-600 {
+  background-color: var(--asf-danger) !important;
+}
+
+/* ─────────── البطاقات والحاويات ─────────── */
+
+.asf-app-content .card,
+.asf-app-content .box,
+.asf-app-content .panel {
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius);
+  background: var(--asf-paper);
+}
+
+/* الظلال الثقيلة المتفرّقة تُوحَّد على ظلّ واحد خفيف. */
+.asf-app-content .shadow,
+.asf-app-content .shadow-md,
+.asf-app-content .shadow-lg,
+.asf-app-content .shadow-xl {
+  box-shadow: 0 2px 10px rgba(31, 42, 61, 0.06) !important;
+}
+
+/* الاستدارات المتفرّقة تُوحَّد. */
+.asf-app-content .rounded,
+.asf-app-content .rounded-md,
+.asf-app-content .rounded-lg {
+  border-radius: var(--asf-radius-sm) !important;
+}
+
+.asf-app-content .rounded-xl,
+.asf-app-content .rounded-2xl {
+  border-radius: var(--asf-radius) !important;
+}
+
+/* ─────────── استغلال المساحة ─────────── */
+
+/*
+  كثير من الشاشات تحصر محتواها في عرض ضيّق فتبقى جوانب الصفحة فارغة.
+  الحاويات المركزية تُطلق لتملأ العرض المتاح.
+*/
+.asf-app-content > .container,
+.asf-app-content .container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.asf-app-content .min-h-screen {
+  min-height: auto;
+}
+
+/* ─────────── استثناء الصفحات الجديدة ─────────── */
+
+/*
+  الصفحات المبنيّة على نظام التصميم تحمل .asf وتُترك كما هي: الترقيع فوقها
+  يعيد المشكلة التي يعالجها.
+*/
+.asf-app-content .asf,
+.asf-app-content .asf * {
+  font-size: revert;
+}
+
+.asf-app-content .asf table {
+  font-size: var(--asf-text-sm);
+}
+
+.asf-app-content .asf thead th {
+  padding: var(--asf-space-1) var(--asf-space-2);
+  background: var(--asf-tint);
+  color: var(--asf-faint);
+  font-size: var(--asf-text-xs);
+}
+
+.asf-app-content .asf tbody td {
+  padding: var(--asf-space-1) var(--asf-space-2);
+}
+
+.asf-app-content.asf-app-content .asf input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.asf-app-content.asf-app-content .asf select,
+.asf-app-content.asf-app-content .asf textarea {
+  height: auto;
+  min-height: var(--asf-control);
+  font-size: var(--asf-text-sm);
+}
+
+.asf-app-content .asf button {
+  min-height: revert;
+}
+
+.asf-app-content .asf .overflow-x-auto,
+.asf-app-content .asf .overflow-auto {
+  border: 0;
+  border-radius: 0;
+}
+
+/* ─────────── عناوين الأقسام في الشاشات القائمة ─────────── */
+
+/*
+  الشاشات القديمة تكتب عنوان القسم عنواناً عارياً أو شريطاً بلون خاص بها.
+  تُوحَّد هنا على لون رأس الصفحة نفسه، فلا يختلف قسم عن قسم.
+*/
+.asf-app-content .section-title,
+.asf-app-content .panel-title,
+.asf-app-content .card-header,
+.asf-app-content .form-section-title,
+.asf-app-content .box-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  margin: 0 0 12px;
+  border-radius: var(--asf-radius-sm);
+  background: var(--ph-bg, #3385a0);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.asf-app-content .section-title *,
+.asf-app-content .panel-title *,
+.asf-app-content .card-header *,
+.asf-app-content .form-section-title *,
+.asf-app-content .box-header * {
+  color: inherit;
+}
+
+/* رؤوس الجداول تأخذ اللون نفسه بدل الكحلي، فيتّسق الجدول مع عنوان قسمه. */
+.asf-app-content thead th {
+  background: var(--ph-bg, #3385a0);
+}
+
+.asf-app-content thead tr.bg-secondaryColor th,
+.asf-app-content thead th.bg-secondaryColor {
+  background: var(--ph-bg-deep, #2b7189);
+}

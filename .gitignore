@@ -1,0 +1,9 @@
+
+# Secrets and local IDE files
+**/.idea/
+**/Credentials/token_store/
+**/token_store/
+*.user
+
+# Local credentials
+**/Credentials/

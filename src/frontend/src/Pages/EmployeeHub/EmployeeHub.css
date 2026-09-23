@@ -1,0 +1,98 @@
+/* قسم الموظفين — تقويم الفريق وما يخصّه. */
+
+.asf-cal {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.asf-cal__head {
+  padding: 7px 4px;
+  border-radius: 8px;
+  background: var(--asf-tint);
+  color: var(--asf-muted);
+  font-size: var(--asf-text-xs);
+  font-weight: 700;
+  text-align: center;
+}
+
+.asf-cal__pad {
+  min-height: 84px;
+}
+
+.asf-cal__day {
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px;
+  border: 1px solid var(--asf-line);
+  border-radius: 8px;
+  background: var(--asf-paper);
+}
+
+/* اليوم الذي فيه إجازة يُميَّز بخلفية لا بلون نصّ: يُرى من مسافة. */
+.asf-cal__day--busy {
+  background: #f3f9fb;
+  border-color: #cde2ea;
+}
+
+.asf-cal__day--today {
+  border-color: var(--ph-bg, #3385a0);
+  box-shadow: inset 0 0 0 1px var(--ph-bg, #3385a0);
+}
+
+.asf-cal__num {
+  color: var(--asf-faint);
+  font-size: var(--asf-text-xs);
+  font-variant-numeric: tabular-nums;
+  text-align: start;
+}
+
+.asf-cal__day--today .asf-cal__num {
+  color: var(--ph-bg-deep, #2b7189);
+  font-weight: 800;
+}
+
+.asf-cal__chip {
+  overflow: hidden;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--ph-bg, #3385a0);
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* خانة اختيار بنصّها، تُستعمل في شريط الأدوات. */
+.asf-check {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  color: var(--asf-muted);
+  font-size: var(--asf-text-sm);
+  cursor: pointer;
+}
+
+.asf-check input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--ph-bg, #3385a0);
+}
+
+@media (max-width: 860px) {
+  .asf-cal {
+    gap: 4px;
+  }
+
+  .asf-cal__day,
+  .asf-cal__pad {
+    min-height: 62px;
+  }
+
+  .asf-cal__chip {
+    font-size: 9px;
+  }
+}

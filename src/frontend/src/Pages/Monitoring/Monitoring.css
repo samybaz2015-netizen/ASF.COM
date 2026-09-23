@@ -1,0 +1,313 @@
+/* لوحة المتابعة */
+
+.mon-grid {
+  display: grid;
+  gap: var(--asf-space-3);
+}
+
+.mon-notices {
+  margin-bottom: var(--asf-space-3);
+  padding: 10px 14px;
+  border: 1px solid #e7dcc2;
+  border-radius: var(--asf-radius-sm);
+  background: #fffdf6;
+}
+
+.mon-notices p {
+  margin: 0;
+  color: var(--asf-warn);
+  font-size: var(--asf-text-sm);
+  line-height: 1.8;
+}
+
+.mon-ok { color: var(--asf-ok); }
+.mon-danger { color: var(--asf-danger); }
+
+/* ─────────── الفلاتر ─────────── */
+
+.mon-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--asf-space-2);
+}
+
+.mon-periods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--asf-space-2);
+  margin-top: var(--asf-space-3);
+}
+
+.mon-periods fieldset {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--asf-space-2);
+  margin: 0;
+  padding: 10px 12px 12px;
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-tint);
+}
+
+.mon-periods legend {
+  padding: 0 6px;
+  color: var(--asf-muted);
+  font-size: var(--asf-text-xs);
+  font-weight: 700;
+}
+
+/* ─────────── المسند والمصروف والمتبقي ─────────── */
+
+.mon-money {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: var(--asf-space-2);
+}
+
+.mon-money__card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-paper);
+}
+
+.mon-money__card > svg {
+  font-size: 20px;
+  color: var(--ph-bg, #3385a0);
+}
+
+.mon-money__card span {
+  display: block;
+  color: var(--asf-muted);
+  font-size: var(--asf-text-xs);
+}
+
+.mon-money__card b {
+  display: block;
+  margin: 2px 0;
+  color: var(--asf-ink);
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.mon-money__card small {
+  display: block;
+  color: var(--asf-faint);
+  font-size: var(--asf-text-xs);
+}
+
+.mon-money__card--ok > svg { color: var(--asf-ok); }
+.mon-money__card--warn > svg { color: var(--asf-warn); }
+.mon-money__card--danger > svg { color: var(--asf-danger); }
+.mon-money__card--danger b { color: var(--asf-danger); }
+
+.mon-money__bar {
+  height: 10px;
+  margin-top: var(--asf-space-3);
+  overflow: hidden;
+  border-radius: 6px;
+  background: #eef1f5;
+}
+
+.mon-money__fill {
+  display: block;
+  height: 100%;
+  border-radius: 6px;
+  background: var(--asf-ok);
+}
+
+/* التجاوز بلون الخطر: الشريط الممتلئ وحده لا يميّز ١٠٠٪ من ١٤٠٪. */
+.mon-money__fill--over {
+  background: var(--asf-danger);
+}
+
+/* ─────────── المراحل ─────────── */
+
+.mon-stages {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--asf-space-2);
+}
+
+.mon-stage {
+  padding: 12px 14px;
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-paper);
+}
+
+.mon-stage > header {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.mon-stage > header strong {
+  display: block;
+  overflow: hidden;
+  color: var(--asf-ink);
+  font-size: var(--asf-text-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mon-stage > header small {
+  display: block;
+  margin-top: 2px;
+  color: var(--asf-faint);
+  font-size: var(--asf-text-xs);
+}
+
+.mon-stage__count {
+  color: var(--ph-bg-deep, #2b7189);
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.mon-stage__bar {
+  height: 6px;
+  margin: 10px 0;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #eef1f5;
+}
+
+.mon-stage__bar span {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--ph-bg, #3385a0);
+}
+
+.mon-stage__values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+}
+
+.mon-stage__values dt {
+  color: var(--asf-faint);
+  font-size: 10px;
+}
+
+.mon-stage__values dd {
+  margin: 2px 0 0;
+  color: var(--asf-ink);
+  font-size: var(--asf-text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.mon-stage__progress {
+  height: 4px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #eef1f5;
+}
+
+.mon-stage__progress span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--asf-ok);
+}
+
+.mon-stage__note {
+  margin: 8px 0 0;
+  color: var(--asf-warn);
+  font-size: 10px;
+}
+
+/* ─────────── شريط صغير داخل الجداول ─────────── */
+
+.mon-mini {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #eef1f5;
+}
+
+.mon-mini span {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--ph-bg, #3385a0);
+}
+
+/* ─────────── حركة العمل ─────────── */
+
+.mon-legend {
+  display: flex;
+  gap: 12px;
+  font-size: var(--asf-text-xs);
+}
+
+.mon-legend span {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.mon-legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.mon-legend__moves { background: var(--ph-bg, #3385a0); }
+.mon-legend__tasks { background: var(--asf-ok); }
+
+.mon-chart {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 160px;
+  padding-top: 8px;
+  overflow-x: auto;
+}
+
+.mon-chart__col {
+  display: flex;
+  flex: 1 0 18px;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.mon-chart__bar {
+  position: relative;
+  width: 100%;
+  min-height: 2px;
+  border-radius: 3px 3px 0 0;
+  background: var(--ph-bg, #3385a0);
+}
+
+/* المهام جزء من العمود لا عمود ثانٍ: المجموع يُقرأ بارتفاع واحد. */
+.mon-chart__tasks {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: block;
+  border-radius: 0 0 3px 3px;
+  background: var(--asf-ok);
+}
+
+.mon-chart__col small {
+  color: var(--asf-faint);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 700px) {
+  .mon-periods fieldset { grid-template-columns: 1fr; }
+  .mon-stage__values { grid-template-columns: 1fr 1fr; }
+}

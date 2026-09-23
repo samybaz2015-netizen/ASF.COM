@@ -1,0 +1,72 @@
+.map-component {
+  margin: 0 auto;
+}
+
+.map-component .card-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.map-component .card {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  width: 30%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.map-component .address {
+  border: 1px solid rgba(212, 215, 221, 1);
+  border-right: 5px solid var(--second-color);
+  padding: 20px;
+}
+.map-component .address p {
+  color: rgba(65, 68, 75, 1);
+  font-size: 12px;
+}
+.map-component .Message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.map-component .Message span {
+  background-color: rgba(103, 103, 105, 1);
+  color: white;
+  padding: 10px;
+}
+.map-component .phone {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.map-component .phone span {
+  background-color: var(--second-color);
+  color: white;
+  padding: 10px;
+}
+.map-component .card img {
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.map-component .card-content h3 {
+  margin: 0;
+}
+
+.map-component .card-content p {
+  margin: 5px 0 0;
+}
+.map-component .link-phone,
+.map-component .link-email {
+  color: black;
+}
+@media (max-width: 980px) {
+  .map-component .card-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

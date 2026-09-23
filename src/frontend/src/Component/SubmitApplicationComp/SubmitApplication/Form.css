@@ -1,0 +1,196 @@
+.form-container {
+  background-color: #f7f7f7;
+}
+.form-container .radio-container {
+  background-color: #fff;
+  padding-top: 30px;
+}
+
+.radio-group {
+  margin-bottom: 20px;
+}
+.radio-group label {
+  cursor: pointer;
+  margin: 5px 0;
+  padding: 10px;
+  margin-left: 40px;
+  border-radius: 5px;
+  font-weight: 700;
+  transition: background-color 0.3s;
+}
+.radio-group input[type="radio"] {
+  display: none;
+}
+.radio-circle {
+  display: inline-block;
+  margin-bottom: -4px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(216, 216, 216, 1);
+  border-radius: 50%;
+  margin-left: 10px;
+  position: relative;
+}
+
+.radio-group input[type="radio"]:checked + .radio-circle {
+  background-color: white;
+  border: 1px solid rgba(76, 175, 79, 1) !important;
+}
+
+.radio-group input[type="radio"]:checked + .radio-circle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(76, 175, 79, 1);
+  border: 1px solid rgba(76, 175, 79, 1) !important;
+}
+.FormData {
+  background-color: rgba(247, 247, 247, 1);
+  padding: 40px 0px;
+  text-align: center;
+}
+.FormData .container {
+  width: 60%;
+}
+.input-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.groub_fe {
+  flex: 1;
+  display: flex;
+  align-items: start;
+  gap: 2px;
+  margin-bottom: 5px;
+  flex-direction: column;
+} 
+
+.groub_fe input  {
+  display: block !important;
+  width: 100% !important;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.upload-section {
+  margin-bottom: 20px;
+}
+.upload-section h4 {
+  text-align: start !important;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: rgba(87, 102, 117, 1);
+  font-size: 20px;
+}
+
+.upload-box {
+  border: 2px dashed rgba(56, 78, 183, 0.3);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.file-list {
+  margin-top: 10px;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  background-color: white;
+  padding: 5px 20px;
+  border: 1px solid rgba(76, 175, 79, 1);
+  border-radius: 10px;
+  margin-bottom: 15px !important;
+}
+.file-item img {
+  width: 200px !important;
+  height: auto !important;
+}
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.upload-button,
+.camera-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: rgba(76, 175, 79, 1);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.file-list .file-item .delete {
+  background: rgba(255, 243, 243, 1) !important;
+  color: rgba(228, 29, 29, 1) !important;
+  border: none;
+  border-radius: 50%;
+  padding: 2px 8px;
+}
+.violations {
+  text-align: start;
+}
+.upload-section.violations {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100% !important;
+}
+.upload-section.violations .upload-box,
+.upload-section.violations .file-list {
+  width: 47%;
+}
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(197, 202, 209, 1);
+  border-radius: 10px;
+  outline: none;
+}
+.button-group {
+  width: 100%;
+  gap: 20px;
+}
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button-group .submit-button,
+.button-group .cancel-button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.button-group .submit-button:hover {
+  background-color: rgba(76, 175, 79, 0.8);
+  transform: scale(1.05);
+}
+
+.button-group .cancel-button:hover {
+  background-color: rgba(76, 175, 79, 0.1);
+  transform: scale(1.05);
+}
+@media (max-width: 980px) {
+  .FormData .container {
+    width: 100%;
+  }
+}

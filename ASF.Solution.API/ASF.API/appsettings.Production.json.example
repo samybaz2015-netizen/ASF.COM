@@ -1,0 +1,54 @@
+{
+    // ============================================================
+    // Production Configuration Template
+    // ============================================================
+    // Copy this file to appsettings.Production.json and replace
+    // all __PLACEHOLDER__ values with real secrets.
+    //
+    // Recommended: set these via environment variables instead of
+    // hardcoding them in the JSON file.
+    //
+    // Required environment variables:
+    //   ConnectionStrings__DefaultConnection
+    //   ConnectionStrings__IdentityConnection
+    //   JWT__Secret
+    //   MailSettings__Password
+    // ============================================================
+
+    "Logging": {
+        "LogLevel": {
+            "Default": "Warning",
+            "Microsoft.AspNetCore": "Warning"
+        }
+    },
+    "AllowedHosts": "*",
+    "ConnectionStrings": {
+        // Replace __DB_PASSWORD__ with the production database password
+        "DefaultConnection": "Data Source=__DB_SERVER__;Initial Catalog=__DB_NAME_DEFAULT__;User Id=__DB_USER__;Password=__DB_PASSWORD__;Encrypt=True;TrustServerCertificate=True;",
+        "IdentityConnection": "Data Source=__DB_SERVER__;Initial Catalog=__DB_NAME_IDENTITY__;User Id=__DB_USER__;Password=__DB_PASSWORD__;Encrypt=True;TrustServerCertificate=True;"
+    },
+    "JWT": {
+        "ValidAudience": "MySecureUsers",
+        "ValidIssuer": "__JWT_ISSUER_URL__",
+        // Must be a strong random string, at least 32 characters
+        "Secret": "__JWT_SECRET__",
+        "AccessTokenLifeTimeInDay": "1"
+    },
+    "Kestrel": {
+        "Limits": {
+            "MaxRequestBodySize": 209715200
+        }
+    },
+    "GoogleDrive": {
+        "ApplicationName": "ASF Consult",
+        "RootFolderId": "__GOOGLE_DRIVE_FOLDER_ID__"
+    },
+    "MailSettings": {
+        "Port": 587,
+        "SmtpServer": "smtp.gmail.com",
+        // Use a Gmail App Password, not the account password
+        "Email": "__MAIL_EMAIL__",
+        "DisplayedName": "Asff",
+        "Password": "__MAIL_PASSWORD__"
+    }
+}

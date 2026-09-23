@@ -1,0 +1,90 @@
+.projects-page {
+  margin-top: 100px;
+}
+.search-container {
+  margin-bottom: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.pagination-button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+}
+
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card p {
+  font-size: 16px;
+  margin: 0;
+  padding: 4px;
+  color: #222;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.NotFoundProject {
+  text-align: center;
+}
+.NotFoundProject img {
+  width: 400px;
+}
+.NotFoundProject p {
+  font-weight: 700;
+  text-align: center;
+}
+.no-results-message img {
+  width: 100%;
+}
+.buttonUpdeteDelete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.buttonUpdeteDelete .delete-project-button {
+  background-color: transparent;
+  border: none;
+  color: rgba(239, 56, 38, 1);
+  font-size: 25px;
+}
+@media (max-width: 980px) {
+  .NotFoundProject img {
+    width: 100%;
+  }
+}

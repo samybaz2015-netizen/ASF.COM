@@ -1,0 +1,212 @@
+.provinces-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-section h2 {
+    color: black;
+    font-family: 'Cairo', sans-serif;
+    font-size: 24px;
+}
+
+.add-button {
+    background-color: rgba(93, 95, 239, 1);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+}
+
+.add-button:hover {
+    background-color: rgba(57, 60, 209, 0.986);
+}
+
+.provinces-table {
+    border-collapse: collapse;
+    font-family: 'Cairo', sans-serif;
+}
+
+.provinces-table th,
+.provinces-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.provinces-table thead th {
+    background-color: rgba(93, 95, 239, 1);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.provinces-table tbody td {
+    background-color: white;
+    color: black;
+}
+
+.provinces-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* Main container */
+.provinces-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Header section */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-section h2 {
+    color: rgba(93, 95, 239, 1);
+    font-family: 'Cairo', sans-serif;
+    font-size: 24px;
+}
+
+/* Add button */
+.add-button {
+    background-color: rgba(93, 95, 239, 1);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+}
+
+.add-button:hover {
+    background-color: rgba(57, 60, 209, 0.986);
+}
+
+/* Table styling */
+.provinces-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+}
+
+.provinces-table th,
+.provinces-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.provinces-table thead th {
+    background-color: rgba(93, 95, 239, 1);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.provinces-table tbody td {
+    background-color: white;
+    color: black;
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100%  !important;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.modal-content {
+    background-color: white !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    width: 500px !important;
+    max-width: 90% !important;
+}
+
+.modal-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.modal-header h3 {
+    margin: 0 !important;
+    color: rgba(93, 95, 239, 1) !important;
+}
+
+.modal-close {
+    cursor: pointer !important;
+    font-size: 20px !important;
+}
+
+.modal-body .form-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-bottom: 10px !important;
+}
+
+.modal-body .form-group {
+    flex: 1 !important;
+    margin: 0 5px !important; 
+}
+
+.modal-body label {
+    display: block !important;
+    margin-bottom: 5px !important;
+
+}
+.modal-body input {
+    padding: 15px 10px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 5px !important;
+    width: 90% !important;
+    font-family: 'Cairo', sans-serif !important;
+
+}
+.modal-body input::placeholder{
+    font-family: 'Cairo', sans-serif !important;
+}
+.modal-footer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.action-button {
+    border: 1px solid rgba(93, 95, 239, 1) !important;
+    color:  rgba(93, 95, 239, 1);
+    background-color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 100px !important;
+    font-family: 'Cairo', sans-serif;
+    transition: .3s;
+}
+
+.action-button:hover {
+    background-color: rgba(57, 60, 209, 0.986);
+    color: white
+
+}

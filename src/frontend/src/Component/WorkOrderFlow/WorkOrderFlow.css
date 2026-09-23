@@ -1,0 +1,203 @@
+/* لوحة موقع أمر العمل · mainColor #2a385b · secondaryColor #bc915c */
+
+.wf-panel {
+  background: #fff;
+  border: 1px solid #e6e9ef;
+  border-inline-start: 4px solid #bc915c;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin: 1rem 0;
+  font-family: "Cairo", sans-serif;
+  color: #2a385b;
+}
+
+.wf-panel__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.wf-panel__label {
+  display: block;
+  font-size: 0.68rem;
+  color: #8b93a8;
+  font-weight: 600;
+}
+
+.wf-panel__basket {
+  margin: 0.15rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.wf-panel__meta {
+  font-size: 0.72rem;
+  color: #7a849c;
+}
+
+.wf-link {
+  border: none;
+  background: transparent;
+  color: #2a385b;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+/* المهام */
+
+.wf-tasks {
+  list-style: none;
+  margin: 0.8rem 0 0;
+  padding: 0;
+}
+
+.wf-task {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.45rem;
+  border: 1px solid #eef1f6;
+  border-radius: 7px;
+  margin-bottom: 0.3rem;
+  background: #fbfcfe;
+}
+
+.wf-task label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  margin: 0;
+}
+
+.wf-task--done .wf-task__name {
+  text-decoration: line-through;
+  color: #8b93a8;
+}
+
+.wf-task__name {
+  font-weight: 600;
+}
+
+.wf-task__by {
+  font-size: 0.68rem;
+  color: #8b93a8;
+  margin-inline-start: auto;
+}
+
+.wf-tag {
+  font-size: 0.66rem;
+  font-weight: 700;
+  border-radius: 20px;
+  padding: 0.1rem 0.45rem;
+  background: #f2f4f8;
+  color: #56607a;
+  white-space: nowrap;
+}
+
+.wf-tag--req {
+  background: #fdecec;
+  color: #b3372f;
+}
+
+/* الموانع */
+
+.wf-blockers {
+  list-style: none;
+  margin: 0.7rem 0 0;
+  padding: 0.5rem 0.7rem;
+  background: #fff8ec;
+  border: 1px solid #f0dcbc;
+  border-radius: 7px;
+  font-size: 0.75rem;
+  color: #9a6a20;
+}
+
+.wf-blockers li + li {
+  margin-top: 0.25rem;
+}
+
+/* أزرار النقل */
+
+.wf-moves {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+}
+
+.wf-move {
+  border: 1px solid #d8dde7;
+  background: #fff;
+  color: #2a385b;
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 600;
+  border-radius: 7px;
+  padding: 0.38rem 0.75rem;
+  cursor: pointer;
+}
+
+.wf-move--fwd:hover:not(:disabled) {
+  background: #2a385b;
+  border-color: #2a385b;
+  color: #fff;
+}
+
+.wf-move--back {
+  color: #8b6a34;
+  border-style: dashed;
+}
+
+.wf-move--back:hover:not(:disabled) {
+  background: #fff8ec;
+  border-color: #bc915c;
+}
+
+.wf-move:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* سجل الحركة */
+
+.wf-history {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0.7rem 0 0;
+  border-top: 1px solid #eef1f6;
+  font-size: 0.75rem;
+}
+
+.wf-history li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: baseline;
+  padding: 0.25rem 0;
+}
+
+.wf-history__meta {
+  color: #8b93a8;
+  font-size: 0.68rem;
+}
+
+.wf-history__note {
+  color: #56607a;
+  font-size: 0.7rem;
+  background: #f5f6f8;
+  border-radius: 5px;
+  padding: 0.05rem 0.35rem;
+}
+
+.wf-history__empty {
+  color: #8b93a8;
+}

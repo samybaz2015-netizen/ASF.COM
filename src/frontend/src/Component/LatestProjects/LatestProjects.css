@@ -1,0 +1,95 @@
+.latest-projects-container {
+  margin: 40px 0;
+  text-align: center;
+}
+
+.latest-projects-container .section-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--second-color);
+}
+
+.latest-projects-container .cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.latest-projects-container .project-card {
+  margin: 10px;
+  width: calc(25% - 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.latest-projects-container .project-image {
+  width: 100%;
+  height: 150px;
+}
+
+.latest-projects-container .project-info {
+  padding: 15px !important;
+  text-align: right;
+  border: 1px solid rgba(102, 102, 102, 1);
+  width: 100%;
+  margin-top: 20px;
+}
+
+.latest-projects-container .project-title {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.latest-projects-container .order-number,
+.latest-projects-container .project-date {
+  font-size: 1rem;
+  margin: 30px 0;
+  color: rgba(102, 102, 102, 1);
+}
+
+.latest-projects-container .view-project-button {
+  margin-top: 10px;
+  margin-bottom: 10px !important;
+  background: transparent;
+  border: 1px solid rgba(102, 102, 102, 1);
+  color: rgba(102, 102, 102, 1);
+  padding: 10px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.latest-projects-container .view-project-button:hover {
+  background: rgba(102, 102, 102, 0.1);
+}
+
+.latest-projects-container .view-all-button {
+  padding: 10px 60px;
+  margin-top: 20px !important;
+  margin-bottom: 20px;
+  background: transparent;
+  border: 1px solid rgba(102, 102, 102, 1);
+  color: rgba(102, 102, 102, 1);
+  cursor: pointer;
+  transition: background 0.3s;
+  font-weight: 700;
+}
+
+.latest-projects-container .view-all-button:hover {
+  background: rgba(102, 102, 102, 0.1);
+}
+
+@media (max-width: 768px) {
+  .latest-projects-container {
+    margin-top: 380px;
+  }
+  .latest-projects-container .project-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .latest-projects-container .project-card {
+    width: 100%;
+  }
+}

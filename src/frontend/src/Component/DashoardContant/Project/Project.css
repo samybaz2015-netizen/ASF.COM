@@ -1,0 +1,52 @@
+.Projects{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+#Project-List-BarChart.project-list{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    flex: 40%;
+
+}
+#Project-List-BarChart.project-list h3{
+    margin: 0px ;
+    padding: 0px;
+}
+#Project-List-BarChart.project-list .numberOrder{
+    color: rgba(102, 102, 102, 1);
+}
+#Project-List-BarChart .project-card {
+    border: 1px solid rgba(224, 224, 224, 1);
+    color: black !important;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#Project-List-BarChart .project-card *{
+    margin: 0px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+#Project-List-BarChart .project-image img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-top: 5px;
+}
+
+#Project-List-BarChart .project-details {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    #Project-List-BarChart .project-card{
+        flex-direction: column;
+    }
+}

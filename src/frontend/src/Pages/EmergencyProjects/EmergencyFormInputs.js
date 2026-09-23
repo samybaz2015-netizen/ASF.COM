@@ -1,0 +1,614 @@
+﻿import React, { useEffect, useState } from "react";
+import { FaClipboardList, FaHistory, FaMoneyBillWave, FaTools } from "react-icons/fa";
+import {
+  ErrorModal,
+  LoadingModal,
+  SuccessModal,
+} from "../../Component/Common/ModelComponents";
+import RequestBtns from "../../Component/RequestBtns/RquestBtns";
+import renderUploadSection from "../../Component/RenderFile/RenderFile";
+import SelectConsultant from "../../Component/SelectConsultant/SelectConusltant";
+import WorkDescriptionInput from "../../Component/WorkDescriptionInput/WorkDescriptionInput";
+import SelectDistrict from "../../Component/SelectDistrict/SelectDistrict";
+import RequestStatus from "../../Component/RequestStatus/RequestStatus";
+import RadioGroup from "../../Component/RadioGroup/RadioGroup";
+import SelectWorkOrderType from "../../Component/SelectWorkOrderType/SelectWorkOrderType";
+import OfficeSelect from "../../Component/SelectOffice/SelectOffice";
+import SelectSituation from "../../Component/SelectSitution/SelectSitudation";
+import EquipmentTestTypeSelect from "../../Component/EquipmentTestTypeSelect/EquipmentTestTypeSelect";
+import NumberOfEquipment from "../../Component/NumberOfEquipment/NumberOfEquipment";
+import PricingItemsSelector from "../Construction/Pricingitemsselector";
+import { readOnlyBoxStyle } from "../Maintains/FomInputs";
+import ExecutedQuantityLogsModal from "../Construction/ExecutedQuantityLogsModal/ExecutedQuantityLogsModal";
+import { OwnerSelect, PartySelect } from "../../Component/ProjectLookupSelects/ProjectLookupSelects.jsx";
+
+import { SectionLabel } from "../../Component/Common/SectionLabel";
+const TABS = [
+  { id: 0,    label: "بيانات المقايسة",           Icon: FaClipboardList  },
+  { id: 1,    label: "البيانات المالية للمقايسة", Icon: FaMoneyBillWave  },
+  { id: 2,    label: "أعمال المقايسة",            Icon: FaTools          },
+  { id: 3,  label: "سجل التعديلات",                Icon: FaHistory  },
+
+];
+
+/* ── small helpers ── */
+
+const blue   = { bg: "#f0f9ff", border: "#2563eb", text: "#1e40af" };
+const yellow = { bg: "#fefce8", border: "#ca8a04", text: "#92400e" };
+const green  = { bg: "#f0fdf4", border: "#16a34a", text: "#14532d" };
+
+function FomInputs({
+  handleChange,
+  handleFileChange,
+  fileInputRefs,
+  openFileSelector,
+  fileData,
+  handleApiFileDelete,
+  handleFileDelete,
+  errorMessage,
+  setShowModal,
+  showModal,
+  successMessage,
+  refreshPage,
+  uploadProgress,
+  setLoading,
+  loading,
+  formData,
+  handleSubmit,
+  apiData,
+  id,          
+  token,        
+  setFormData,  
+}) {
+  const [activeTab, setActiveTab] = useState(0);
+
+    const handleDurationOrReceiveDateChange = (e) => {
+  handleChange(e); 
+
+  const { name, value } = e.target;
+
+  setFormData((prev) => {
+    const receiveDate = name === "ReceiveDateTime" ? value : prev.ReceiveDateTime;
+    const duration = name === "DurationOfImplementation" ? value : prev.DurationOfImplementation;
+
+    if (receiveDate && duration) {
+      const date = new Date(receiveDate);
+      date.setDate(date.getDate() + Number(duration));
+      const formattedDate = date.toISOString().split("T")[0];
+      return { ...prev, OrderDate: formattedDate };
+    }
+
+    return prev;
+  });
+
+};
+
+ 
+return (
+    <div className="form-container" dir="rtl">
+      <div className="w-full max-w-none px-4">
+        <div className="FormData w-full max-w-none">
+
+          {/* ── Header ── */}
+          <div style={{ textAlign: "center", marginBottom: "28px" }}>
+            <h3 style={{ marginBottom: "6px" }}>بيانات الطلب</h3>
+            <p style={{ color: "#6b7280", fontSize: "14px" }}>
+              Get a Quote Immediately Upon Form Submission
+            </p>
+          </div>
+
+          {/* ── Tab Bar ── */}
+          <div
+           style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "6px",
+            marginBottom: "28px",
+            borderBottom: "2px solid #e5e7eb",
+            paddingBottom: "8px",
+          }}
+          >
+            {TABS.map(({ id, label, Icon }) => {
+              const active = activeTab === id;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setActiveTab(id)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "10px 18px",
+                    fontSize: "13px",
+                    fontWeight: active ? "600" : "400",
+                    cursor: "pointer",
+                    background: active ? "#eff6ff" : "transparent",
+                    border: "none",
+                    borderBottom: active ? "2px solid #2563eb" : "2px solid transparent",
+                    marginBottom: "-2px",
+                    color: active ? "#2563eb" : "#6b7280",
+                    borderRadius: "6px 6px 0 0",
+                    transition: "all 0.2s",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  <Icon size={15} />
+                  {label}
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "18px",
+                      height: "18px",
+                      borderRadius: "50%",
+                      fontSize: "10px",
+                      fontWeight: "700",
+                      background: active ? "#2563eb" : "#e5e7eb",
+                      color: active ? "#fff" : "#6b7280",
+                    }}
+                  >
+                    {id + 1}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* ── Progress bar ── */}
+          <div style={{ display: "flex", gap: "6px", marginBottom: "24px" }}>
+            {TABS.map(({ id }) => (
+              <div
+                key={id}
+                style={{
+                  flex: 1,
+                  height: "4px",
+                  borderRadius: "2px",
+                  background:
+                    id < activeTab ? "#2563eb" : id === activeTab ? "#93c5fd" : "#e5e7eb",
+                  transition: "background 0.3s",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* ══════════════════════════════════════════
+              TAB 0 — بيانات المقايسة
+          ══════════════════════════════════════════ */}
+
+          <div style={{ display: activeTab === 0 ? "block" : "none" }}>
+          {activeTab === 0 && (
+            <div>
+              <SectionLabel color={blue}>معلومات المشروع الأساسية</SectionLabel>
+
+              <div className="flex flex-wrap flex-col lg:flex-row gap-3">
+                <OfficeSelect
+                  selectedOffice={formData.Office}
+                  onOfficeChange={handleChange}
+                />
+                <div className="groub_fe">
+                  <label>رقم امر العمل</label>
+                  <input
+                    type="text"
+                    name="FaultNumber"
+                    placeholder="نوع امر العمل"
+                    value={formData.FaultNumber || ""}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-wrap flex-col lg:flex-row gap-3">
+                <div className="groub_fe">
+                  <label>رقم الاشعار</label>
+                  <input
+                    type="text"
+                    name="NotificationNumber"
+                    placeholder="رقم الاشعار"
+                    value={formData.NotificationNumber || ""}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="groub_fe">
+                  <label>رقم المهمة</label>
+                  <input
+                    type="text"
+                    name="TaskNumber"
+                    placeholder="رقم المهمه"
+                    value={formData.TaskNumber || ""}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <EquipmentTestTypeSelect
+                  value={formData.TypeOfStomachTest}
+                  handleChange={handleChange}
+                />
+              </div>
+
+              <div className="flex flex-wrap flex-col lg:flex-row gap-3">
+                <SelectWorkOrderType
+                  value={formData.WorkOrderType}
+                  handleChange={handleChange}
+                />
+                <NumberOfEquipment
+                  value={formData.NumberOfEquipment}
+                  handleChange={handleChange}
+                />
+              </div>
+
+              <div className="flex flex-wrap flex-col lg:flex-row gap-3">
+                <SelectDistrict
+                  officeName={formData.Office}
+                  value={formData.District}
+                  onChange={handleChange}
+                />
+               
+              </div>
+
+              <SectionLabel color={blue}>بيانات التنفيذ</SectionLabel>
+
+                  <div className="flex flex-wrap flex-col lg:flex-row gap-3">
+                    <div className="groub_fe">
+                      <label>تاريخ استلام امر العمل</label>
+                      <input
+                        type="date"
+                        name="ReceiveDateTime"
+                        value={formData.ReceiveDateTime || ""}
+                        onChange={handleDurationOrReceiveDateChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="groub_fe">
+                      <label>مدة التنفيذ (بالأيام)</label>
+                      <input
+                        type="number"
+                        name="DurationOfImplementation"
+                        placeholder="مدة التنفيذ"
+                        value={formData.DurationOfImplementation || ""}
+                        onChange={handleDurationOrReceiveDateChange}
+                        required
+                      />
+                    </div>
+
+                    <div className="groub_fe">
+                      <label>تاريخ التنفيذ</label>
+                      <input
+                        type="date"
+                        name="OrderDate"
+                        value={formData.OrderDate || ""}
+                        readOnly
+                      />
+                    </div>
+                  </div>
+
+
+              <div className="flex flex-wrap flex-col lg:flex-row gap-3">
+                <WorkDescriptionInput
+                  onChange={handleChange}
+                  value={formData.WorkDescription}
+                />
+
+              </div>
+              
+                <PartySelect type="المقاول" label="اسم المقاول" name="Contractor" value={formData.Contractor} onChange={handleChange} />
+                {/* <PartySelect type="المهندس" label="اسم المهندس" name="Engineer" value={formData.Engineer} onChange={handleChange} /> */}
+                <PartySelect type="المشرف"  label="اسم المشرف"  name="Supervisor" value={formData.Supervisor} onChange={handleChange} />
+                {/* <div className="groub_fe">
+                  <label>اسم المشرف</label>
+                  <input
+                    type="text"
+                    name="Supervisor"
+                    placeholder="اسم المشرف"
+                    value={formData.Supervisor || ""}
+                    onChange={handleChange}
+                  />
+                </div> */}
+                <OwnerSelect label="مالك المشروع" name="ProjectOwner" value={formData.ProjectOwner} onChange={handleChange} />
+
+              <div className="flex flex-wrap flex-col lg:flex-row gap-3">
+                <div className="groub_fe">
+                  <label>رقم المحطه</label>
+                  <input
+                    type="text"
+                    name="StationNumber"
+                    placeholder="رقم المحطه"
+                    value={formData.StationNumber || ""}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+               
+              </div>
+
+              {/* Next Button */}
+              <div style={{ display: "flex", justifyContent: "flex-start", marginTop: "24px", paddingTop: "16px", borderTop: "1px solid #e5e7eb" }}>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab(1)}
+                  style={{ padding: "10px 28px", background: "#2563eb", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}
+                >
+                  <FaMoneyBillWave size={14} /> التالي ←
+                </button>
+              </div>
+            </div>
+          )}
+          </div>
+
+          {/* ══════════════════════════════════════════
+              TAB 1 — البيانات المالية للمقايسة
+          ══════════════════════════════════════════ */}
+
+            <div style={{ display: activeTab === 1 ? "block" : "none" }}>
+          {activeTab === 1 && (
+            <div>
+              <SectionLabel color={yellow}>القيم والمستخلصات</SectionLabel>
+
+             <div className="input-group">
+  <div className="groub_fe">
+    <label>القيمة التقديرية (تُحسب تلقائيًا من البنود)</label>
+    <div style={readOnlyBoxStyle}>{formData.EstimatedValue || "0.00"}</div>
+  </div>
+  <div className="groub_fe">
+    <label>القيمة الفعلية المنفذه(تُحسب تلقائيًا من البنود) </label>
+    <div style={readOnlyBoxStyle}>{formData.ActualValue || "0.00"}</div>
+  </div>
+  <div className="groub_fe">
+    <label>الفرق (تقديري - فعلي)</label>
+    {(() => {
+      const estimated = parseFloat(formData.EstimatedValue) || 0;
+      const actual = parseFloat(formData.ActualValue) || 0;
+      const diff = estimated - actual;
+      const isPositive = diff >= 0;
+
+      return (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "10px 14px",
+            borderRadius: "10px",
+            border: `1px solid ${isPositive ? "#2563eb33" : "#ea580c33"}`,
+            background: isPositive ? "#2563eb0d" : "#ea580c0d",
+            fontWeight: 600,
+            fontSize: "15px",
+            color: isPositive ? "#1d4ed8" : "#c2410c",
+          }}
+        >
+          <span>{Math.abs(diff).toFixed(2)}</span>
+          <span style={{ fontSize: "13px", fontWeight: 500, opacity: 0.8 }}>
+            {isPositive ? "أقل من التقديري" : "أعلى من التقديري"}
+          </span>
+        </div>
+      );
+    })()}
+  </div>
+  <div className="groub_fe">
+    <label>رقم المستخلص</label>
+    <input
+      type="text"
+      name="ExtractNumber"
+      placeholder="رقم المستخلص"
+      value={formData.ExtractNumber || ""}
+      onChange={handleChange}
+      required
+    />
+  </div>
+</div>
+
+              <SectionLabel color={yellow}>الحالة والملاحظات</SectionLabel>
+
+              <div className="flex flex-wrap flex-col lg:flex-row gap-3">
+                <SelectSituation
+                  value={formData.Situation}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="input-group">
+                <textarea
+                  name="Note"
+                  placeholder="الملاحظات"
+                  value={formData.Note}
+                  onChange={handleChange}
+                />
+              </div>
+
+              {/* Prev / Next Buttons */}
+              <div style={{ display: "flex", justifyContent: "space-between", marginTop: "24px", paddingTop: "16px", borderTop: "1px solid #e5e7eb" }}>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab(0)}
+                  style={{ padding: "10px 24px", background: "transparent", color: "#374151", border: "1px solid #d1d5db", borderRadius: "8px", fontSize: "14px", fontWeight: "500", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}
+                >
+                  → السابق
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab(2)}
+                  style={{ padding: "10px 28px", background: "#2563eb", color: "#fff", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: "600", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}
+                >
+                  <FaTools size={13} /> التالي ←
+                </button>
+              </div>
+            </div>
+          )}
+            </div>
+
+          {/* ══════════════════════════════════════════
+              TAB 2 — أعمال المقايسة
+          ══════════════════════════════════════════ */}
+
+          <div style={{ display: activeTab === 2 ? "block" : "none" }}>
+          {activeTab === 2 && (
+          
+          <div>
+
+              <PricingItemsSelector
+                value={formData.PricingItemIds || []}
+                initialItems={formData.pricingItemsObjects || []}
+                entityType="Emergency"   
+                projectId={id}
+                token={token}
+                onChange={(ids, dtos, totals) => {
+                  handleChange({ target: { name: "PricingItemIds", value: ids } });
+                  handleChange({ target: { name: "pricingItemsObjects", value: dtos } });
+                  if (totals) {
+                    setFormData((prev) => ({
+                      ...prev,
+                      EstimatedValue: totals.totalEstimatedValue.toFixed(2),
+                      ActualValue: totals.totalExecutedValue.toFixed(2),
+                    }));
+                  }
+                }}
+              />
+              
+              <SectionLabel color={green}>مخالفات السلامة</SectionLabel>
+
+              <RadioGroup
+                label="مخالفات السلامة"
+                options={[
+                  { label: "يوجد",    value: "exists"     },
+                  { label: "لا يوجد", value: "not-exists" },
+                ]}
+                name="SafetyViolationsExist"
+                selectedValue={formData.SafetyViolationsExist}
+                onChange={handleChange}
+              />
+              
+
+              {formData.SafetyViolationsExist &&
+                renderUploadSection(
+                  "صور مخالفات السلامة",
+                  "SafetyWastePhotos",
+                  "صور المخالفات",
+                  handleFileChange,
+                  fileInputRefs,
+                  openFileSelector,
+                  fileData,
+                  handleApiFileDelete,
+                  handleFileDelete,
+                  true,                                      
+                  false, 
+                  apiData?.projectType || "الطوارئ"
+                )}
+
+              <div className="input-group">
+                <textarea
+                  name="DescriptionViolation"
+                  placeholder="وصف المخالفه"
+                  value={formData.DescriptionViolation}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <SectionLabel color={green}>المستندات والمرفقات</SectionLabel>
+
+              {renderUploadSection(
+                "المستندات ",
+                "ModelPhotos",
+                "تصوير مستندات مع الختم",
+                handleFileChange,
+                fileInputRefs,
+                openFileSelector,
+                fileData,
+                handleApiFileDelete,
+                handleFileDelete,
+                true,                                      
+                  false, 
+                  apiData?.projectType || "الطوارئ"
+              )}
+              {renderUploadSection(
+                "صور الموقع",
+                "SitePhotos",
+                "صور الموقع",
+                handleFileChange,
+                fileInputRefs,
+                openFileSelector,
+                fileData,
+                handleApiFileDelete,
+                handleFileDelete,
+                true,                                      
+                  false, 
+                  apiData?.projectType || "الطوارئ"
+              )}
+              {renderUploadSection(
+                "مستندات الاختبار",
+                "TestModels",
+                "مستندات الاختبار",
+                handleFileChange,
+                fileInputRefs,
+                openFileSelector,
+                fileData,
+                handleApiFileDelete,
+                handleFileDelete,
+                true,                                      
+                  false, 
+                  apiData?.projectType || "الطوارئ"
+              )}
+
+              <RequestBtns
+                loading={loading}
+                Situation={formData.Situation}
+                handleSubmit={handleSubmit}
+              />
+
+              {/* Prev Button */}
+              <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid #e5e7eb" }}>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab(1)}
+                  style={{ padding: "10px 24px", background: "transparent", color: "#374151", border: "1px solid #d1d5db", borderRadius: "8px", fontSize: "14px", fontWeight: "500", cursor: "pointer" }}
+                >
+                  → السابق
+                </button>
+              </div>
+            </div>
+          )}
+         </div>
+
+           {/* ============================================================
+                        TAB 4 — سجل التغيرات
+              ============================================================ */}
+          
+                <div style={{ display: activeTab === 3 ? "block" : "none" }}>
+                        {activeTab === 3 && ( 
+                          <>
+                            <ExecutedQuantityLogsModal
+                              entityType="Emergency"
+                              projectId={id}
+                              token={token}
+                            />
+                          </>
+          
+                        )}
+                </div>
+
+        </div>
+      </div>
+
+      <LoadingModal
+        show={loading}
+        onHide={() => setLoading(false)}
+        uploadProgress={uploadProgress}
+      />
+      <SuccessModal
+        show={showModal.success}
+        onHide={refreshPage}
+        message={successMessage}
+      />
+      <ErrorModal
+        show={showModal.error}
+        onHide={() => setShowModal({ error: false, success: false })}
+        message={errorMessage}
+      />
+    </div>
+  );
+}
+
+export default FomInputs;

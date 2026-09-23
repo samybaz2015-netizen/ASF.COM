@@ -1,0 +1,48 @@
+.all-admin-private-projects {
+  padding: 2rem;
+  direction: rtl;
+}
+
+.projects-table {
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.projects-table .MuiTableHead-root {
+  background-color: #f5f5f5;
+}
+
+.projects-table .MuiTableCell-head {
+  font-weight: bold;
+  color: #333;
+}
+ 
+.projects-table .MuiTableRow-root:hover {
+  background-color: #f8f9fa;
+}
+
+.projects-table .MuiIconButton-root {
+  padding: 4px;
+}
+ 
+.projects-table .MuiIconButton-root:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+ 
+.projects-table .MuiTableCell-root {
+  padding: 12px 16px;
+}
+ 
+.projects-table .MuiTooltip-tooltip {
+  font-size: 0.875rem;
+}
+ 
+@media (max-width: 768px) {
+  .all-admin-private-projects {
+    padding: 1rem;
+  }
+ 
+  .projects-table .MuiTableCell-root {
+    padding: 8px;
+  }
+} 

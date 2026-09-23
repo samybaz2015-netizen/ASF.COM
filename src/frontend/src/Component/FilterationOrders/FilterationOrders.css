@@ -1,0 +1,137 @@
+.filter-container {
+  margin-bottom: 1rem;
+}
+
+.filter-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.filter-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.filter-input-container,
+.filter-select-container,
+.filter-date-container {
+  width: 100%;
+}
+
+.filter-input,
+.filter-select {
+  width: 100%;
+  padding: 0.5rem 2.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  color: #374151;
+  background-color: white;
+  transition: all 0.2s;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.filter-icon {
+  position: absolute;
+  right: 0.75rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.select-arrow {
+  position: absolute;
+  left: 0.75rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+  pointer-events: none;
+}
+
+.filter-loading {
+  padding: 0.5rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.filter-error {
+  padding: 0.5rem;
+  text-align: center;
+  color: #ef4444;
+  font-size: 0.875rem;
+  background-color: #fee2e2;
+  border-radius: 0.375rem;
+}
+
+/* RTL Support */
+[dir="rtl"] .filter-icon {
+  right: auto;
+  left: 0.75rem;
+}
+
+[dir="rtl"] .select-arrow {
+  left: auto;
+  right: 0.75rem;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .filter-input,
+  .filter-select {
+    font-size: 1rem;
+    padding: 0.625rem 2.5rem;
+  }
+
+  .filter-label {
+    font-size: 1rem;
+  }
+}
+
+/* Hover States */
+.filter-input:hover,
+.filter-select:hover {
+  border-color: #9ca3af;
+}
+
+/* Disabled State */
+.filter-input:disabled,
+.filter-select:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .filter-input-container,
+  .filter-select-container,
+  .filter-date-container {
+    background-color: #1e293b;
+    border-color: #334155;
+  }
+
+  .filter-input,
+  .filter-select {
+    color: #f1f5f9;
+  }
+
+  .filter-input::placeholder,
+  .filter-select option:first-child,
+  .filter-icon,
+  .select-arrow {
+    color: #ffffff;
+  }
+
+  .filter-loading {
+    color: #94a3b8;
+  }
+} 

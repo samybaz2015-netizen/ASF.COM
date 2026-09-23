@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* توحيد شكل الشاشات القائمة — يأتي بعد Tailwind ليغلب أصنافه المتفرّقة. */
+@import "./styles/asf-retrofit.css";
+
+:root {
+  --second-color: rgba(188, 145, 92, 1);
+  --second-color-light: rgba(188, 145, 92, 0.5);
+  --hover-color: rgba(42, 56, 91, 0.5);
+  --main-color: rgba(42, 56, 91, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+.input-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.swal2-container {
+  z-index: 10000 !important;
+}
+input,
+select {
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+label {
+  color: var(--main-color) !important;
+  font-weight: 600 !important; 
+}
+input::placeholder {
+  color: var(--main-color) !important;
+  font-weight: 400 !important;
+  font-size: 10px !important;
+
+  /* font-family: "Courier New", Courier, monospace; */
+}
+
+body {
+  font-family: "Cairo", sans-serif !important;
+  box-sizing: border-box;
+  margin: 0;
+  overflow-x: hidden;
+  background: #f5f7f6;
+}
+
+a {
+  text-decoration: none;
+}
+
+.selectSituation {
+  width: 100% !important;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+table td {
+  font-weight: 400;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+}
+.dropdown-menu[data-bs-popper] {
+  right: 0 !important;
+}
+
+/* Flexbox Utility */
+.flexBetween {
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.save-button {
+  color: var(--main-color) !important;
+  border: 1px solid var(--main-color) !important;
+  font-family: "Cairo", sans-serif !important;
+}
+.cancel-button {
+  color: rgba(215, 45, 22, 1) !important;
+  border: 1px solid rgba(215, 45, 22, 1) !important;
+  font-family: "Cairo", sans-serif !important;
+}
+@media (max-width: 980px) {
+  .flexBetween {
+    display: block;
+  }
+}
+
+/* Image Style */
+.operation img {
+  cursor: pointer;
+}
+/* button {
+  background-color: var(--second-color)  !important;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+} */
+
+.button:hover {
+  background-color: var(--main-color);
+  transform: scale(0.98);
+}
+
+/* Responsive Container Widths */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1150px;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 980px) {
+  .buttonStyle {
+    padding: 7px 7px;
+  }
+
+  .link span {
+    width: 130px;
+  }
+}
+
+@media (max-width: 988px) {
+  h1 {
+    font-size: 20px;
+  }
+}

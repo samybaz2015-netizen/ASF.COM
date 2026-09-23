@@ -1,0 +1,109 @@
+.subscribers-container {
+  text-align: center;
+  padding: 120px 20px;
+  background-color: rgba(247, 247, 247, 1);
+}
+
+.subscribers-container .title {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.subscribers-container .description {
+  font-size: 16px;
+  margin-bottom: 50px;
+  color: #555;
+  font-weight: 500;
+}
+.office-image {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.DIV-relative {
+  position: relative;
+}
+.office {
+  top: -50px;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px 1px rgb(141, 137, 137);
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+ 
+
+.office-card:hover {
+  background-color: var(--second-color);
+  color: #ffff;
+}
+.office-text {
+  font-size: 14px;
+  padding: 3px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.subscribers-container .cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.input-item {
+  display: flex;
+  width: 100%;
+  gap: 4px;
+  justify-items: start;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  flex-direction: column;
+}
+
+.subscribers-container .card {
+  width: 250px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent !important;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border 0.3s ease, transform 0.3s ease; /* إضافة تأثير تحريك */
+}
+
+.subscribers-container .card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+a {
+  text-decoration: none !important;
+}
+
+.subscribers-container .card p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  font-weight: 700;
+} 
+
+.subscribers-container .card.selected p {
+  color: var(--second-color);
+}
+
+.subscribers-container .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white !important;
+  border: 2px solid var(--second-color);
+}

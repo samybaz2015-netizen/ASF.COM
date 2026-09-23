@@ -1,0 +1,99 @@
+{
+  "common": {
+    "back": "رجوع",
+    "search": "بحث",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "loading": "جارٍ التحميل…",
+    "noResults": "لا توجد نتائج",
+    "all": "الكل",
+    "viewAll": "عرض الكل",
+    "notAvailable": "غير متاح"
+  },
+  "header": {
+    "welcome": "مرحبًا بك",
+    "quickSearchPlaceholder": "بحث سريع… (أمر عمل، طلب، بلاغ، مستند)",
+    "newAction": "إجراء جديد",
+    "notifications": "التنبيهات",
+    "noNotifications": "لا توجد تنبيهات",
+    "viewAllNotifications": "عرض جميع التنبيهات",
+    "language": "اللغة",
+    "searchHint": "اكتب رقم أمر عمل أو طلب أو بلاغ",
+    "searching": "جارٍ البحث…",
+    "openMenu": "فتح القائمة",
+    "recent": "الأخيرة"
+  },
+  "userMenu": {
+    "profile": "الملف الشخصي",
+    "changePassword": "تغيير كلمة المرور",
+    "settings": "إعدادات المستخدم",
+    "language": "اللغة",
+    "logout": "تسجيل الخروج",
+    "logoutConfirmTitle": "تسجيل الخروج",
+    "logoutConfirmText": "هل تريد الخروج من النظام؟"
+  },
+  "quickActions": {
+    "title": "الإجراءات السريعة",
+    "newConstruction": "إنشاء أمر عمل (إنشاءات)",
+    "monitoring": "لوحة المتابعة",
+    "dailyExecution": "تحديث التنفيذ اليومي",
+    "searchWorkOrder": "البحث عن أمر عمل",
+    "newRequest": "إضافة طلب",
+    "settings": "الإعدادات",
+    "empty": "لا توجد إجراءات متاحة لصلاحياتك"
+  },
+  "menu": {
+    "home": "الرئيسيه",
+    "search": "بحث الطلبات",
+    "dailyExecution": "تحديث التنفيذ اليومي",
+    "privateProjects": "المشاريع الخاصة",
+    "accounts": "الحسابات",
+    "branches": "الافرع",
+    "employees": "العاملين",
+    "permissions": "اضافة صلاحيات",
+    "offices": "المكاتب",
+    "districts": "الاحياء",
+    "consultants": "الاستشاريون",
+    "projectOwners": "ملاك المشاريع",
+    "projectParties": "جهات المشاريع",
+    "acceptRequests": "قبول الطلبات",
+    "deleteRequests": "طلبات الحذف",
+    "custodies": "العهد",
+    "notifications": "الاشعارات",
+    "vacations": "الإجازات",
+    "checkAttendance": "تسجيل الحضور",
+    "taskType": "نوع أمر العمل",
+    "trash": "سلة المهملات",
+    "settings": "الإعدادات",
+    "profile": "الملف الشخصي",
+    "groups": {
+      "requests": "الطلبات",
+      "projects": "المشاريع",
+      "management": "الإدارة",
+      "employees": "العاملين والموارد",
+      "system": "النظام"
+    },
+    "accessManagement": "إدارة الصلاحيات"
+  },
+  "breadcrumbs": {
+    "home": "الرئيسية",
+    "workOrders": "أوامر العمل",
+    "requests": "الطلبات",
+    "system": "النظام"
+  },
+  "dailyExecution": {
+    "title": "تحديث التنفيذ اليومي",
+    "subtitle": "تسجيل ومراجعة كميات التنفيذ اليومية لأوامر العمل",
+    "saveDraft": "حفظ كمسودة",
+    "submitForReview": "إرسال للمراجعة",
+    "workOrder": "أمر العمل",
+    "status": "الحالة",
+    "stage": "المرحلة الحالية",
+    "location": "الموقع"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "subtitle": "إعدادات النظام واستيراد بيانات التسعير"
+  }
+}

@@ -1,0 +1,818 @@
+/*
+  نظام تصميم عصف.
+
+  مقاييسه وبنيته مأخوذة من برنامج عطاء الجزيرة — سلّم خطوط صغير منضبط، مسافات
+  ثابتة، لوحات بحواف موحّدة — وألوانه ألوان عصف (كحلي #2a385b وذهبي #bc915c)
+  لأن البرنامجين لجهتين مختلفتين ولا يصحّ أن يلبس أحدهما هوية الآخر.
+
+  كل صفحة جديدة تبني على هذه الرموز بدل أن تخترع مقاساتها، فلا تتفاوت
+  الشاشات.
+*/
+
+:root {
+  /* الهوية */
+  --asf-navy: #2a385b;
+  --asf-navy-deep: #1d2742;
+  --asf-gold: #bc915c;
+  --asf-gold-dark: #9a7440;
+
+  /* الحبر والأسطح */
+  --asf-ink: #1f2a3d;
+  --asf-muted: #6b7691;
+  --asf-faint: #98a1b5;
+  --asf-line: #e3e7ef;
+  --asf-paper: #ffffff;
+  --asf-canvas: #f4f6fa;
+  --asf-tint: #f8fafd;
+
+  /* دلالات الحالة */
+  --asf-ok: #2f7952;
+  --asf-ok-bg: #e4f3e9;
+  --asf-warn: #9a6817;
+  --asf-warn-bg: #fff2dd;
+  --asf-danger: #a33636;
+  --asf-danger-bg: #fbe6e6;
+  --asf-info: #2c738e;
+  --asf-info-bg: #e8f2f6;
+
+  /* سلّم الخط */
+  --asf-text-xs: 10px;
+  --asf-text-sm: 11px;
+  --asf-text-md: 12px;
+  --asf-text-lg: 14px;
+  --asf-text-xl: 20px;
+
+  /* المسافات */
+  --asf-space-1: 6px;
+  --asf-space-2: 10px;
+  --asf-space-3: 14px;
+  --asf-space-4: 18px;
+  --asf-space-5: 24px;
+
+  --asf-radius: 14px;
+  --asf-radius-sm: 9px;
+  --asf-control: 38px;
+}
+
+/* ─────────── الصفحة ─────────── */
+
+.asf {
+  font-family: "Cairo", Tahoma, Arial, sans-serif;
+  font-size: var(--asf-text-md);
+  line-height: 1.55;
+  color: var(--asf-ink);
+  background: var(--asf-canvas);
+  min-height: 100vh;
+}
+
+.asf-page {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: var(--asf-space-4) clamp(14px, 2.2vw, 30px) 40px;
+}
+
+/* شريط ترويسة الصفحة: يملأ العرض ويحمل الملخّص بدل ترك فراغ فوق الشاشة */
+.asf-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--asf-space-5);
+  flex-wrap: wrap;
+  padding: var(--asf-space-4) var(--asf-space-5);
+  margin-bottom: var(--asf-space-3);
+  border-radius: 17px;
+  color: #fff;
+  background: linear-gradient(125deg, var(--asf-navy-deep), #3a4b76);
+}
+
+.asf-hero small {
+  display: block;
+  font-size: var(--asf-text-xs);
+  font-weight: 800;
+  color: #c8b189;
+  letter-spacing: 0.02em;
+}
+
+.asf-hero h2 {
+  margin: 4px 0 0;
+  font-size: var(--asf-text-xl);
+  line-height: 1.3;
+}
+
+.asf-hero p {
+  margin: 5px 0 0;
+  font-size: var(--asf-text-sm);
+  color: #c3ccdf;
+}
+
+/* أرقام الملخّص داخل الترويسة */
+.asf-hero-stats {
+  display: flex;
+  gap: var(--asf-space-4);
+  flex-wrap: wrap;
+}
+
+.asf-hero-stat {
+  min-width: 86px;
+  padding: var(--asf-space-2) var(--asf-space-3);
+  border-radius: var(--asf-radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.asf-hero-stat b {
+  display: block;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.asf-hero-stat span {
+  font-size: var(--asf-text-xs);
+  color: #c3ccdf;
+}
+
+/* ─────────── التبويبات ─────────── */
+
+.asf-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  padding: 5px;
+  margin-bottom: var(--asf-space-3);
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-paper);
+}
+
+.asf-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 0 var(--asf-space-3);
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--asf-muted);
+  font: inherit;
+  font-size: var(--asf-text-sm);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.15s ease;
+}
+
+.asf-tab:hover {
+  color: var(--asf-navy);
+  background: var(--asf-tint);
+}
+
+.asf-tab--active {
+  color: #fff;
+  background: var(--asf-navy);
+}
+
+.asf-tab__count {
+  min-width: 18px;
+  padding: 0 5px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.09);
+  font-size: var(--asf-text-xs);
+  font-weight: 800;
+}
+
+.asf-tab--active .asf-tab__count {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ─────────── اللوحات ─────────── */
+
+.asf-panel {
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius);
+  background: var(--asf-paper);
+  margin-bottom: var(--asf-space-3);
+}
+
+/*
+  عنوان القسم.
+
+  يأخذ لون رأس الصفحة نفسه من الرمز --ph-bg، فتتّسق ترويسة الصفحة مع عناوين
+  أقسامها بلا لون يُكتب في كل شاشة على حدة. تغيير الرمز يسري على الاثنين.
+*/
+.asf-panel__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--asf-space-3);
+  flex-wrap: wrap;
+  padding: var(--asf-space-3) var(--asf-space-4);
+  border-bottom: 0;
+  border-start-start-radius: var(--asf-radius);
+  border-start-end-radius: var(--asf-radius);
+  background: var(--ph-bg, #3385a0);
+  color: #fff;
+}
+
+.asf-panel__head h3 {
+  margin: 0;
+  color: #fff;
+  font-size: var(--asf-text-lg);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.asf-panel__head p {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: var(--asf-text-xs);
+}
+
+.asf-panel__body {
+  padding: var(--asf-space-3) var(--asf-space-4) var(--asf-space-4);
+}
+
+/* شبكة تملأ العرض بدل ترك فراغ على الجانب */
+.asf-grid {
+  display: grid;
+  gap: var(--asf-space-2);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.asf-split {
+  display: grid;
+  gap: var(--asf-space-3);
+  grid-template-columns: minmax(210px, 264px) 1fr;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .asf-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─────────── الأزرار ─────────── */
+
+.asf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: var(--asf-control);
+  padding: 0 var(--asf-space-3);
+  border: 1px solid #d9dfea;
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-paper);
+  color: var(--asf-navy);
+  font: inherit;
+  font-size: var(--asf-text-sm);
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.asf-btn:hover:not(:disabled) {
+  border-color: var(--asf-gold);
+}
+
+.asf-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.asf-btn--primary {
+  border-color: var(--asf-navy);
+  background: var(--asf-navy);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(42, 56, 91, 0.18);
+}
+
+.asf-btn--primary:hover:not(:disabled) {
+  background: #35456e;
+  border-color: #35456e;
+}
+
+.asf-btn--gold {
+  border-color: var(--asf-gold);
+  background: var(--asf-gold);
+  color: #fff;
+}
+
+.asf-btn--gold:hover:not(:disabled) {
+  background: var(--asf-gold-dark);
+  border-color: var(--asf-gold-dark);
+}
+
+.asf-btn--sm {
+  min-height: 30px;
+  padding: 0 var(--asf-space-2);
+  font-size: var(--asf-text-xs);
+}
+
+.asf-icon-btn {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--asf-faint);
+  font-size: var(--asf-text-sm);
+  cursor: pointer;
+}
+
+.asf-icon-btn:hover:not(:disabled) {
+  background: var(--asf-tint);
+  color: var(--asf-navy);
+}
+
+.asf-icon-btn--danger:hover:not(:disabled) {
+  background: var(--asf-danger-bg);
+  color: var(--asf-danger);
+}
+
+.asf-icon-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ─────────── الشارات ─────────── */
+
+.asf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 24px;
+  padding: 2px 9px;
+  border-radius: 20px;
+  background: #eef1f7;
+  color: var(--asf-muted);
+  font-size: var(--asf-text-xs);
+  font-weight: 800;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.asf-chip--gold { background: #f7efe3; color: var(--asf-gold-dark); }
+.asf-chip--ok { background: var(--asf-ok-bg); color: var(--asf-ok); }
+.asf-chip--warn { background: var(--asf-warn-bg); color: var(--asf-warn); }
+.asf-chip--danger { background: var(--asf-danger-bg); color: var(--asf-danger); }
+.asf-chip--info { background: var(--asf-info-bg); color: var(--asf-info); }
+
+/* ─────────── الحقول ─────────── */
+
+.asf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--asf-text-xs);
+}
+
+.asf-field > span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--asf-muted);
+  font-weight: 800;
+}
+
+.asf-field input,
+.asf-field select,
+.asf-field textarea {
+  min-height: var(--asf-control);
+  padding: 0 var(--asf-space-2);
+  border: 1px solid #d9dfea;
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-paper);
+  color: var(--asf-ink);
+  font: inherit;
+  font-size: var(--asf-text-sm);
+}
+
+.asf-field textarea {
+  min-height: 62px;
+  padding: var(--asf-space-1) var(--asf-space-2);
+  resize: vertical;
+}
+
+.asf-field input:focus,
+.asf-field select:focus,
+.asf-field textarea:focus {
+  outline: none;
+  border-color: var(--asf-gold);
+  box-shadow: 0 0 0 3px rgba(188, 145, 92, 0.13);
+}
+
+.asf-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--asf-text-sm);
+  color: var(--asf-muted);
+  cursor: pointer;
+}
+
+.asf-check input {
+  accent-color: var(--asf-navy);
+  cursor: pointer;
+}
+
+/* شريط أدوات/فلاتر يملأ العرض */
+.asf-toolbar {
+  display: grid;
+  gap: var(--asf-space-2);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  align-items: end;
+  padding: var(--asf-space-3) var(--asf-space-4);
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius);
+  background: var(--asf-paper);
+  margin-bottom: var(--asf-space-3);
+}
+
+.asf-toolbar__actions {
+  display: flex;
+  gap: var(--asf-space-1);
+  align-items: end;
+}
+
+/* ─────────── الجداول ─────────── */
+
+.asf-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--asf-text-sm);
+}
+
+.asf-table th,
+.asf-table td {
+  padding: var(--asf-space-1) var(--asf-space-2);
+  border-bottom: 1px solid var(--asf-line);
+  text-align: inherit;
+  vertical-align: middle;
+}
+
+.asf-table th {
+  color: var(--asf-faint);
+  font-size: var(--asf-text-xs);
+  font-weight: 800;
+  background: var(--asf-tint);
+  position: sticky;
+  top: 0;
+}
+
+.asf-table tbody tr:hover {
+  background: var(--asf-tint);
+}
+
+.asf-table__scroll {
+  max-height: 460px;
+  overflow: auto;
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius-sm);
+}
+
+/* ─────────── حالات فارغة ─────────── */
+
+.asf-empty {
+  display: grid;
+  gap: 5px;
+  justify-items: center;
+  padding: var(--asf-space-5) var(--asf-space-3);
+  color: var(--asf-faint);
+  font-size: var(--asf-text-sm);
+  text-align: center;
+}
+
+.asf-empty strong {
+  color: var(--asf-muted);
+  font-size: var(--asf-text-md);
+}
+
+.asf-hint {
+  color: var(--asf-faint);
+  font-size: var(--asf-text-xs);
+}
+
+.asf-error {
+  padding: var(--asf-space-2);
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-danger-bg);
+  color: var(--asf-danger);
+  font-size: var(--asf-text-sm);
+}
+
+/* ما يقع داخل عنوان القسم الملوّن يُقرأ فوقه لا تحته */
+.asf-panel__head .asf-btn {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.asf-panel__head .asf-btn:hover:not(:disabled) {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.asf-panel__head .asf-btn--primary {
+  border-color: #fff;
+  background: #fff;
+  color: var(--ph-bg, #3385a0);
+}
+
+.asf-panel__head .asf-btn--primary:hover:not(:disabled) {
+  background: #f1f7f9;
+  color: var(--ph-bg-deep, #2b7189);
+}
+
+.asf-panel__head .asf-chip {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.asf-panel__head .asf-icon-btn,
+.asf-panel__head .cw-tip__btn {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.asf-panel__head .asf-icon-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+/* ═══════════════ شاشة الإعدادات: قائمة أقسام + لوحة قيم ═══════════════
+
+   الشريط الأفقي للتبويبات كان يضيق كلّما زاد قسم، فتُقصّ الأسماء. القائمة
+   الرأسية تتّسع طولاً لا عرضاً، وتُظهر عدّاد كل قسم بجانبه.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.asf-settings {
+  display: grid;
+  /* الاتجاه من اليمين، فالعمود الأول هو الأيمن: القائمة أولاً ثم اللوحة. */
+  grid-template-columns: 236px minmax(0, 1fr);
+  gap: var(--asf-space-3);
+  align-items: start;
+}
+
+.asf-cats {
+  display: grid;
+  gap: 5px;
+  padding: 10px;
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius);
+  background: var(--asf-paper);
+  position: sticky;
+  top: 12px;
+}
+
+.asf-cats__btn {
+  min-height: 46px;
+  display: grid;
+  grid-template-columns: 26px 1fr auto;
+  gap: 9px;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--asf-muted);
+  font: inherit;
+  font-size: var(--asf-text-sm);
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.asf-cats__btn:hover:not(:disabled),
+.asf-cats__btn--active {
+  border-color: #cadfe7;
+  background: #eef7fa;
+  color: var(--ph-bg-deep, #2b7189);
+}
+
+.asf-cats__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.asf-cats__btn > svg {
+  font-size: 14px;
+  justify-self: center;
+}
+
+.asf-cats__btn strong {
+  font-size: var(--asf-text-sm);
+  font-weight: 700;
+}
+
+.asf-cats__count {
+  min-width: 24px;
+  padding: 3px 6px;
+  border-radius: 12px;
+  background: #edf1f5;
+  color: var(--asf-muted);
+  font-size: var(--asf-text-xs);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.asf-cats__btn--active .asf-cats__count {
+  background: #dceaf0;
+  color: var(--ph-bg-deep, #2b7189);
+}
+
+/* ─────────── صفّ الإضافة ─────────── */
+
+.asf-setting-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px minmax(0, 1fr) auto;
+  gap: var(--asf-space-2);
+  align-items: end;
+  margin-bottom: var(--asf-space-3);
+  padding: 12px;
+  border: 1px solid #dbe7ec;
+  border-radius: var(--asf-radius-sm);
+  background: #f4fafc;
+}
+
+/* ─────────── شبكة القيم ─────────── */
+
+.asf-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.asf-values__item {
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  padding: 9px;
+  border: 1px solid var(--asf-line);
+  border-radius: 10px;
+  background: var(--asf-tint);
+}
+
+/* المعطّل يُعرض باهتاً ولا يُخفى: إخفاؤه يجعل المستخدم يعيد إضافته مكرّراً. */
+.asf-values__item--off {
+  background: #fbfbfc;
+  opacity: 0.62;
+}
+
+.asf-values__mark {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: #e6f4f1;
+  color: var(--asf-ok);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.asf-values__item--off .asf-values__mark {
+  background: #eef0f3;
+  color: var(--asf-faint);
+}
+
+.asf-values__body {
+  min-width: 0;
+}
+
+.asf-values__body strong {
+  display: block;
+  font-size: var(--asf-text-sm);
+  color: var(--asf-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.asf-values__body small {
+  display: block;
+  margin-top: 3px;
+  color: var(--asf-faint);
+  font-size: var(--asf-text-xs);
+}
+
+.asf-values__acts {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.asf-values__acts button {
+  min-height: 26px;
+  padding: 0 7px;
+  border: 1px solid var(--asf-line);
+  border-radius: 7px;
+  background: var(--asf-paper);
+  color: var(--asf-muted);
+  font: inherit;
+  font-size: var(--asf-text-xs);
+  cursor: pointer;
+}
+
+.asf-values__acts button:hover:not(:disabled) {
+  border-color: #cadfe7;
+  background: #eef7fa;
+  color: var(--ph-bg-deep, #2b7189);
+}
+
+.asf-values__acts button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.asf-values__acts .asf-values__del {
+  border-color: #ead6d4;
+  background: #fff7f6;
+  color: var(--asf-danger);
+}
+
+.asf-values__acts .asf-values__del:hover:not(:disabled) {
+  border-color: var(--asf-danger);
+  background: #fbe6e6;
+  color: var(--asf-danger);
+}
+
+@media (max-width: 1380px) {
+  .asf-values { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1080px) {
+  .asf-settings { grid-template-columns: 1fr; }
+  .asf-cats { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
+  .asf-values, .asf-cats { grid-template-columns: 1fr; }
+  .asf-setting-form { grid-template-columns: 1fr; }
+}
+
+/* ─────────── شريط تصفية النطاق ─────────── */
+
+.asf-scope {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: var(--asf-space-3);
+  padding-bottom: var(--asf-space-2);
+  border-bottom: 1px solid var(--asf-line);
+}
+
+.asf-scope__label {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin-left: 4px;
+  color: var(--asf-faint);
+  font-size: var(--asf-text-xs);
+}
+
+.asf-scope__btn {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border: 1px solid var(--asf-line);
+  border-radius: 20px;
+  background: var(--asf-paper);
+  color: var(--asf-muted);
+  font: inherit;
+  font-size: var(--asf-text-xs);
+  cursor: pointer;
+}
+
+.asf-scope__btn:hover {
+  border-color: #cadfe7;
+  background: #eef7fa;
+}
+
+.asf-scope__btn--active {
+  border-color: var(--ph-bg, #3385a0);
+  background: var(--ph-bg, #3385a0);
+  color: #fff;
+}
+
+.asf-scope__btn b {
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: #edf1f5;
+  color: var(--asf-muted);
+  font-size: var(--asf-text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.asf-scope__btn--active b {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}

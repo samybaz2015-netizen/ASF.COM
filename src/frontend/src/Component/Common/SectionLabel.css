@@ -1,0 +1,43 @@
+/* عنوان قسم موحّد داخل نماذج أوامر العمل — لون واحد لكل الأنواع والصفحات. */
+
+.asf-section-label {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 22px 0 14px;
+  padding: 9px 16px;
+  border-radius: 8px;
+
+  /* اللون من رمز الرأس الموحّد، فلا يُكتب لونٌ ثانٍ داخل أيّ صفحة. */
+  background: var(--ph-bg, #3385a0);
+
+  /* شريط فاتح على الحافّة يفصل العنوان عمّا فوقه دون لونٍ إضافي. */
+  border-inline-start: 4px solid rgba(255, 255, 255, 0.55);
+
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* عنوان يحمل عدّاداً أو زراً في طرفه الآخر. */
+.asf-section-label--split {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  text-align: start;
+}
+
+/* داخل بطاقة بيضاء ضيّقة يبقى العنوان ممتدّاً على العرض كلّه. */
+.asf-section-label:first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .asf-section-label {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}

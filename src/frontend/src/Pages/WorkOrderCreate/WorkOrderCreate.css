@@ -1,0 +1,184 @@
+/* قالب إنشاء أمر العمل */
+
+.wo-page {
+  padding-bottom: 90px;
+}
+
+/* ─────────── الأقسام المرقّمة ─────────── */
+
+.wo-section {
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius);
+  background: var(--asf-paper);
+  margin-bottom: var(--asf-space-3);
+  overflow: hidden;
+}
+
+.wo-section__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  /* اللون من رمز الرأس الموحّد، لا تدرّج خاص بهذه الشاشة. */
+  background: var(--ph-bg, #3385a0);
+  color: #fff;
+}
+
+.wo-section__num {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.wo-section__head h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.wo-section__head p {
+  margin: 3px 0 0;
+  color: #c3ccdf;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.wo-section__body {
+  padding: var(--asf-space-4);
+}
+
+/* ─────────── الشبكة ─────────── */
+
+.wo-grid {
+  display: grid;
+  gap: var(--asf-space-3);
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.wo-field--wide {
+  grid-column: 1 / -1;
+}
+
+.wo-req {
+  color: var(--asf-danger);
+  font-weight: 800;
+}
+
+.wo-hint {
+  color: var(--asf-faint);
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1.6;
+}
+
+/* الحقول المحسوبة تُميَّز بصرياً حتى لا يُحاول أحد تعديلها */
+.wo-readonly {
+  background: var(--asf-tint) !important;
+  color: var(--asf-muted) !important;
+  cursor: default;
+}
+
+/* ─────────── بنود الأعمال ─────────── */
+
+.wo-search {
+  position: relative;
+  padding: 12px;
+  border: 1px dashed #cdd6e4;
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-tint);
+}
+
+.wo-search--blocked {
+  border-color: #e7d3b4;
+  background: #fffdf8;
+}
+
+.wo-results {
+  position: absolute;
+  z-index: 40;
+  inset-inline: 12px;
+  top: calc(100% - 6px);
+  max-height: 280px;
+  overflow: auto;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid var(--asf-line);
+  border-radius: var(--asf-radius-sm);
+  background: var(--asf-paper);
+  box-shadow: 0 14px 34px rgba(20, 30, 60, 0.16);
+}
+
+.wo-results button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 84px 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 9px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  text-align: inherit;
+  font: inherit;
+  font-size: 12px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.wo-results button:hover {
+  background: var(--asf-tint);
+}
+
+.wo-results b {
+  color: var(--asf-navy);
+  font-size: 11px;
+}
+
+.wo-results em {
+  color: var(--asf-faint);
+  font-size: 10px;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.wo-num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.wo-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--asf-line);
+  font-size: 13px;
+}
+
+.wo-total b {
+  color: var(--asf-navy);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────── شريط الإجراءات ─────────── */
+
+.wo-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+  background: linear-gradient(to top, var(--asf-canvas) 70%, transparent);
+}

@@ -1,0 +1,94 @@
+
+.about-us-container {
+  position: relative;
+}
+.about-us-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.about-us-container .image-content {
+
+  background-size: cover;
+  height: 90vh;
+}
+.about-us-container .about-us-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.about-us-container .text-content {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0px;
+}
+
+.about-us-container .text-content .title-about {
+  padding: 20px;
+  width: 80%;
+}
+.about-us-container .about-us-title {
+  font-size: 2.5rem;
+  margin-bottom: 80px;
+  position: relative;
+}
+.about-us-container .about-us-title::after {
+  content: "";
+  position: absolute;
+  width: 10%;
+  height: 5px;
+  background-color: var(--second-color);
+  bottom: -20px;
+  right: 0px;
+}
+.about-us-container .about-us-description {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.about-us-container .stats-cards {
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-us-container .stats-card {
+  width: 50%;
+  padding: 20px;
+  border-radius: 0px;
+  text-align: center;
+}
+
+.about-us-container .completed-projects {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.about-us-container .years-of-experience {
+  background-color: var(--second-color);
+  color: #000;
+}
+
+.about-us-container .stats-number {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.about-us-container .stats-label {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .about-us-container {
+    width: 97%;
+  }
+  .about-us-container .stats-cards {
+    flex-direction: column;
+  }
+
+  .about-us-container .stats-card {
+    width: 100%;
+  }
+}

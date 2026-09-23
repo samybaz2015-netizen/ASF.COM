@@ -1,0 +1,350 @@
+/* الإعدادات — ألوان النظام: mainColor #2a385b و secondaryColor #bc915c */
+
+.st-page {
+  padding: 1.25rem;
+  background: #f5f6f8;
+  min-height: 100vh;
+  font-family: "Cairo", sans-serif;
+}
+
+.st-page__head h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2a385b;
+  margin: 0;
+}
+
+.st-page__head p {
+  margin: 0.15rem 0 1rem;
+  font-size: 0.8rem;
+  color: #8a94a6;
+  letter-spacing: 0.04em;
+}
+
+.st-card {
+  background: #fff;
+  border: 1px solid #e6e9ef;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.st-card__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2a385b;
+  margin: 0 0 0.6rem;
+}
+
+.st-hint {
+  font-size: 0.8rem;
+  color: #56607a;
+  line-height: 1.8;
+  margin: 0 0 1rem;
+}
+
+.st-hint code {
+  background: #eef1f5;
+  padding: 0.05rem 0.3rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* الخطوات */
+
+.st-step {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid #f0f2f6;
+}
+
+.st-step__num {
+  flex: 0 0 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #2a385b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.st-step__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.st-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2a385b;
+  margin-bottom: 0.45rem;
+}
+
+.st-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.st-file {
+  font-size: 0.8rem;
+  color: #56607a;
+  background: #f8f9fb;
+  border: 1px solid #eef1f5;
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+}
+
+.st-select {
+  height: 38px;
+  min-width: 260px;
+  padding: 0 0.7rem;
+  border: 1px solid #d6dbe4;
+  border-radius: 7px;
+  font-size: 0.9rem;
+  background: #fff;
+  color: #1f2937;
+  font-family: inherit;
+}
+
+.st-select:focus {
+  outline: none;
+  border-color: #2a385b;
+  box-shadow: 0 0 0 3px rgba(42, 56, 91, 0.1);
+}
+
+/* الأزرار */
+
+.st-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 38px;
+  padding: 0 1.1rem;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.st-btn--primary {
+  background: #2a385b;
+  color: #fff;
+}
+
+.st-btn--primary:hover:not(:disabled) {
+  background: #1f2a45;
+}
+
+.st-btn--ghost {
+  background: #fff;
+  border-color: #d6dbe4;
+  color: #2a385b;
+}
+
+.st-btn--ghost:hover:not(:disabled) {
+  border-color: #bc915c;
+  color: #bc915c;
+}
+
+.st-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* الإحصاءات */
+
+.st-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem;
+  margin: 0.9rem 0;
+}
+
+.st-stats--diff {
+  margin-top: 0.8rem;
+}
+
+.st-stat {
+  background: #f8f9fb;
+  border: 1px solid #eef1f5;
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.st-stat--highlight {
+  background: #2a385b;
+  border-color: #2a385b;
+}
+
+.st-stat--highlight .st-stat__label {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.st-stat--highlight .st-stat__value {
+  color: #fff;
+}
+
+.st-stat__label {
+  font-size: 0.72rem;
+  color: #8a94a6;
+}
+
+.st-stat__value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2a385b;
+}
+
+.st-result {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+
+/* الجداول */
+
+.st-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #eef1f5;
+  border-radius: 8px;
+  margin-top: 0.6rem;
+}
+
+.st-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.st-table thead th {
+  background: #2a385b;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.st-table tbody td {
+  padding: 0.4rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid #f0f2f6;
+  color: #1f2937;
+}
+
+.st-desc {
+  max-width: 340px;
+  white-space: normal;
+  text-align: right;
+}
+
+.st-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+}
+
+.st-more {
+  font-size: 0.76rem;
+  color: #8a94a6;
+  text-align: center;
+  padding: 0.4rem;
+  margin: 0;
+}
+
+.st-up {
+  color: #b45309;
+  font-weight: 700;
+}
+
+.st-down {
+  color: #15803d;
+  font-weight: 700;
+}
+
+/* الملاحظات */
+
+.st-warnings {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin: 0.8rem 0;
+  font-size: 0.8rem;
+  color: #92400e;
+}
+
+.st-warnings summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.st-warnings ul {
+  margin: 0.6rem 0 0;
+  padding-inline-start: 1.2rem;
+  line-height: 1.9;
+}
+
+.st-warnings--error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+/* شريط التقدم */
+
+.st-progress {
+  position: relative;
+  height: 22px;
+  background: #eef1f5;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 0.8rem;
+}
+
+.st-progress__fill {
+  height: 100%;
+  background: #2a385b;
+  transition: width 0.2s ease;
+}
+
+.st-progress__text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+@media (max-width: 768px) {
+  .st-page {
+    padding: 0.75rem;
+  }
+
+  .st-select {
+    min-width: 100%;
+  }
+
+  .st-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

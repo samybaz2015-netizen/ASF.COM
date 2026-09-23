@@ -1,0 +1,930 @@
+/* =========================================================
+   FULL SCREEN CINEMATIC LOGIN
+========================================================= */
+
+.Login {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.Login::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        inherit;
+
+    z-index: 0;
+
+    transform: scale(1.03);
+
+    animation:
+        loginBackgroundZoom
+        18s
+        ease-in-out
+        infinite alternate;
+}
+
+
+@keyframes loginBackgroundZoom {
+
+    from {
+        transform: scale(1.03);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   DARK OVERLAY
+========================================================= */
+
+.Login .login-background-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.68),
+            rgba(0, 0, 0, 0.48),
+            rgba(0, 0, 0, 0.68)
+        );
+
+    backdrop-filter:
+        blur(1px);
+}
+
+
+/* =========================================================
+   CINEMATIC GREEN GLOW
+========================================================= */
+
+.Login .login-background-glow {
+    position: absolute;
+
+    width: 800px;
+    height: 800px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(95, 182, 69, 0.13) 0%,
+            rgba(95, 182, 69, 0.05) 30%,
+            transparent 70%
+        );
+
+    animation:
+        loginGlow
+        6s
+        ease-in-out
+        infinite alternate;
+}
+
+
+@keyframes loginGlow {
+
+    from {
+        opacity: 0.35;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.85);
+    }
+
+    to {
+        opacity: 0.8;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.1);
+    }
+}
+
+
+/* =========================================================
+   CENTER
+========================================================= */
+
+.Login .login-center {
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+    max-width: 480px;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+/* =========================================================
+   LOGO
+========================================================= */
+
+.Login .login-logo-wrapper {
+    position: relative;
+
+    z-index: 20;
+
+    width: 390px;
+    min-height: 155px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    padding: 12px 25px;
+
+    box-sizing: border-box;
+
+    /* خلفية شفافة جدًا عشان الكتابة تظهر */
+    background: rgba(255, 255, 255, 0.90);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.28),
+        0 0 35px rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    animation: logoAppear 0.8s ease-out;
+}
+
+
+.Login .login-logo {
+    width: 350px;
+    max-width: 100%;
+
+    max-height: 140px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    display: block;
+
+    /* مهم جدًا:
+       نشيل أي فلتر كان مغير ألوان اللوجو */
+    filter: none !important;
+
+    opacity: 1;
+
+    /* ظل خفيف */
+    filter:
+        drop-shadow(
+            0 4px 8px rgba(0, 0, 0, 0.12)
+        ) !important;
+}
+
+@keyframes logoAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-15px)
+            scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   LOGIN CARD
+========================================================= */
+
+.Login .login-card {
+    position: relative;
+
+    width: 100%;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    background:
+        rgba(
+            10,
+            16,
+            12,
+            0.78
+        );
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.14
+        );
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.55),
+
+        0 0 0 1px
+        rgba(
+            95,
+            182,
+            69,
+            0.03
+        );
+
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
+
+    overflow: hidden;
+
+    animation:
+        cardAppear
+        0.7s
+        ease-out;
+}
+
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   GREEN TOP LINE
+========================================================= */
+
+.Login .login-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #65b94b,
+            #8bd96e,
+            #65b94b,
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(
+            95,
+            182,
+            69,
+            0.6
+        );
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.Login .login-card-top {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding:
+        18px 28px;
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.07
+        );
+}
+
+
+.Login .login-card-top span:first-child {
+    color: #65b94b;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.Login .login-card-top span:last-child {
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.35
+        );
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.Login .login-header {
+    padding:
+        30px 38px 10px;
+
+    text-align: right;
+}
+
+
+.Login .login-header > span {
+    color:
+        #65b94b;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+.Login .login-header h2 {
+    margin:
+        8px 0 7px;
+
+    color: #ffffff;
+
+    font-size: 31px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+.Login .login-header p {
+    margin: 0;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.40
+        );
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.Login .login-form {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 19px;
+
+    padding:
+        22px 38px 35px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.Login .login-field {
+    width: 100%;
+}
+
+
+.Login .login-field label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #65b94b !important;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.Login .login-field input {
+    width: 100%;
+
+    height: 52px;
+
+    padding:
+        0 15px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.13
+        );
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.055
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    transition:
+        all 0.25s ease;
+}
+
+
+.Login .login-field input::placeholder {
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.24
+        );
+}
+
+
+.Login .login-field input:hover {
+    border-color:
+        rgba(
+            95,
+            182,
+            69,
+            0.35
+        );
+}
+
+
+.Login .login-field input:focus {
+    border-color:
+        #65b94b;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.075
+        );
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            95,
+            182,
+            69,
+            0.08
+        );
+}
+
+
+/* =========================================================
+   PASSWORD
+========================================================= */
+
+.Login .password-input {
+    position: relative;
+
+    width: 100%;
+}
+
+
+.Login .password-input input {
+    padding-left: 65px;
+}
+
+
+.Login .password-toggle {
+    position: absolute;
+
+    left: 12px;
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color:  #65b94b;
+
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+    padding: 5px;
+}
+
+
+.Login .password-toggle:hover {
+    color:
+        #38a318;
+}
+
+
+/* =========================================================
+   FORGOT PASSWORD
+========================================================= */
+
+.Login .login-forgot {
+    display: flex;
+
+    justify-content: flex-start;
+
+    margin-top: -3px;
+}
+
+
+.Login .login-forgot a {
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.40
+        );
+
+    font-size: 10px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+.Login .login-forgot a:hover {
+    color:
+        #65b94b;
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.Login .login-submit {
+    width: 100%;
+
+    height: 54px;
+
+    margin-top: 3px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5fb645,
+            #72c957
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px
+        rgba(
+            95,
+            182,
+            69,
+            0.18
+        );
+
+    transition:
+        all 0.25s ease;
+}
+
+
+.Login .login-submit:hover:not(:disabled) {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(
+            95,
+            182,
+            69,
+            0.30
+        );
+}
+
+
+.Login .login-submit:active:not(:disabled) {
+    transform:
+        translateY(0);
+}
+
+
+.Login .login-submit:disabled {
+    opacity: 0.55;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.Login .error-message {
+    padding:
+        10px 12px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            60,
+            70,
+            0.20
+        );
+
+    border-radius: 8px;
+
+    background:
+        rgba(
+            255,
+            40,
+            50,
+            0.08
+        );
+
+    color:
+        #ff9b9f;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 1200px) {
+
+    .Login .login-center {
+        max-width: 500px;
+    }
+
+
+    .Login .login-logo {
+        width: 380px;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .Login {
+        min-height: 100svh;
+    }
+
+
+    .Login .login-center {
+        min-height: 100svh;
+
+        width:
+            calc(100% - 30px);
+
+        padding:
+            25px 0;
+    }
+
+
+    .Login .login-logo {
+        width: 260px;
+
+        max-height: 120px;
+    }
+
+
+    .Login .login-card {
+        border-radius: 15px;
+    }
+
+
+    .Login .login-header {
+        padding:
+            25px 25px 8px;
+    }
+
+
+    .Login .login-header h2 {
+        font-size: 27px;
+    }
+
+
+    .Login .login-form {
+        padding:
+            20px 25px 28px;
+    }
+
+
+    .Login .login-card-top {
+        padding:
+            15px 20px;
+    }
+
+
+    .Login .login-card-top span:last-child {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .Login .login-center {
+        width:
+            calc(100% - 20px);
+    }
+
+
+    .Login .login-logo {
+        width: 220px;
+
+        max-height: 105px;
+
+        margin-bottom: 10px;
+    }
+
+
+    .Login .login-header {
+        padding:
+            22px 20px 5px;
+    }
+
+
+    .Login .login-form {
+        padding:
+            18px 20px 25px;
+
+        gap: 16px;
+    }
+
+
+    .Login .login-field input {
+        height: 49px;
+    }
+}

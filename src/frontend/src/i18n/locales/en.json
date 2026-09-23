@@ -1,0 +1,99 @@
+{
+  "common": {
+    "back": "Back",
+    "search": "Search",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "loading": "Loading…",
+    "noResults": "No results",
+    "all": "All",
+    "viewAll": "View all",
+    "notAvailable": "Not available"
+  },
+  "header": {
+    "welcome": "Welcome",
+    "quickSearchPlaceholder": "Quick search… (work order, request, report, document)",
+    "newAction": "New action",
+    "notifications": "Notifications",
+    "noNotifications": "No notifications",
+    "viewAllNotifications": "View all notifications",
+    "language": "Language",
+    "searchHint": "Type a work order, request or report number",
+    "searching": "Searching…",
+    "openMenu": "Open menu",
+    "recent": "Recent"
+  },
+  "userMenu": {
+    "profile": "Profile",
+    "changePassword": "Change password",
+    "settings": "User settings",
+    "language": "Language",
+    "logout": "Sign out",
+    "logoutConfirmTitle": "Sign out",
+    "logoutConfirmText": "Do you want to sign out?"
+  },
+  "quickActions": {
+    "title": "Quick actions",
+    "newConstruction": "New work order (Construction)",
+    "monitoring": "Monitoring board",
+    "dailyExecution": "Daily execution update",
+    "searchWorkOrder": "Find a work order",
+    "newRequest": "New request",
+    "settings": "Settings",
+    "empty": "No actions available for your permissions"
+  },
+  "menu": {
+    "home": "Home",
+    "search": "Search requests",
+    "dailyExecution": "Daily execution update",
+    "privateProjects": "Private projects",
+    "accounts": "Accounts",
+    "branches": "Branches",
+    "employees": "Staff",
+    "permissions": "Permissions",
+    "offices": "Offices",
+    "districts": "Districts",
+    "consultants": "Consultants",
+    "projectOwners": "Project owners",
+    "projectParties": "Project parties",
+    "acceptRequests": "Approve requests",
+    "deleteRequests": "Deletion requests",
+    "custodies": "Custodies",
+    "notifications": "Notifications",
+    "vacations": "Leave requests",
+    "checkAttendance": "Attendance",
+    "taskType": "Work order types",
+    "trash": "Trash",
+    "settings": "Settings",
+    "profile": "Profile",
+    "groups": {
+      "requests": "Requests",
+      "projects": "Projects",
+      "management": "Administration",
+      "employees": "Staff & resources",
+      "system": "System"
+    },
+    "accessManagement": "Access & Permissions"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "workOrders": "Work orders",
+    "requests": "Requests",
+    "system": "System"
+  },
+  "dailyExecution": {
+    "title": "Daily Execution Update",
+    "subtitle": "Record and review daily executed quantities for work orders",
+    "saveDraft": "Save as draft",
+    "submitForReview": "Submit for review",
+    "workOrder": "Work order",
+    "status": "Status",
+    "stage": "Current stage",
+    "location": "Location"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "System settings and pricing data import"
+  }
+}
