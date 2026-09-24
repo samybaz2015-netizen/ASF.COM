@@ -59,13 +59,15 @@
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5",
     "xlsx-js-style": "^1.2.0",
-    "xlsx-style": "^0.8.13"
+    "xlsx-style": "^0.8.13",
+    "serve": "^14.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve -s build -l $PORT",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
