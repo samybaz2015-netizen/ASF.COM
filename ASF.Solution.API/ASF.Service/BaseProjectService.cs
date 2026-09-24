@@ -144,7 +144,7 @@ namespace ASF.Service
         protected static string ResolveContractNumber(
             string? dtoContractNumber, string? existingContractNumber,
             string branchName, string? office, string? projectPlace,
-            DateTime receiveDateTime, DateTime orderDate)
+            DateTime? receiveDateTime, DateTime? orderDate)
         {
             if (!string.IsNullOrWhiteSpace(dtoContractNumber))
                 return dtoContractNumber;
@@ -152,7 +152,7 @@ namespace ASF.Service
             return existingContractNumber
                 ?? ASF.Core.ContractHelper.GetContractNumber(
                     branchName, office, projectPlace,
-                    receiveDateTime != default ? receiveDateTime : orderDate);
+                    receiveDateTime ?? orderDate);
         }
 
         /// <summary>

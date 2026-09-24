@@ -43,7 +43,7 @@ namespace ASF.Api
                 options.AddPolicy("AllowAll", builder =>
                 {
                     builder
-                        .WithOrigins("http://localhost:3000", "http://localhost:3001", "https://asf-consulting.com", "https://asfconsult-002-site1.ftempurl.com", "https://www.asf-consulting.com")
+                        .WithOrigins("http://localhost:3000", "http://localhost:3001", "https://asf-consulting.com", "https://asfconsult-002-site1.ftempurl.com", "https://www.asf-consulting.com", "https://asf-com.onrender.com")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();
