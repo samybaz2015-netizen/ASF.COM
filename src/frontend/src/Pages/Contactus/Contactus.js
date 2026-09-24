@@ -1,4 +1,4 @@
-import {React , useEffect} from "react";
+import React, { useEffect} from "react";
 import Banner from "../../Component/SubmitApplicationComp/Banner";
 import FormContact from "./FormContact/FormContact";
 import Map from "./Map/Map";

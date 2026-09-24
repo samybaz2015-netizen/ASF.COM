@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import React, { useEffect } from "react";
 import Banner from "../../Component/ArchivedRequestsComp/Banner/Banner";
 import Img from "../../Image/img3.jpeg";
 import Projects from "../../Component/ArchivedRequestsComp/Project/Project";

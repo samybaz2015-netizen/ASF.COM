@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import React, { useEffect } from "react";
 import Banner from "../../Component/SubmitApplicationComp/Banner";
 import AboutComponent from "./AboutComponent/AboutComponent";
 import TheBest from "./AboutComponent/TheBest";

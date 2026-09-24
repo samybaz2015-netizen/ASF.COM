@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "./Form";
 import { useParams } from "react-router-dom";
 import axios from "axios";

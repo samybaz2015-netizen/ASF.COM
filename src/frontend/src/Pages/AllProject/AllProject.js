@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import React, { useEffect } from "react";
 import Projects from "./Projects";
  
 function MainPage({ userData }) {

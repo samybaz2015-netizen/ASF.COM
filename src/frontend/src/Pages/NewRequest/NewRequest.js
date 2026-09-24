@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "../../Component/SubmitApplicationComp/Banner"
 import Form from "./Form"
 import img from "../../Image/Rectangle.png"
