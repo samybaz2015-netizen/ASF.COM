@@ -47,8 +47,8 @@
         "Port": 587,
         "SmtpServer": "smtp.gmail.com",
         // Use a Gmail App Password, not the account password
-        "Email": "__MAIL_EMAIL__",
-        "DisplayedName": "Asff",
+        "Email": "info@asf-consulting.com",
+        "DisplayedName": "نظام عصف الاستشاري",
         "Password": "__MAIL_PASSWORD__"
     }
 }
