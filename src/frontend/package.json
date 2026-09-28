@@ -22,6 +22,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/d3": "^7.4.3",
+    "ajv": "^8.20.0",
+    "ajv-keywords": "^5.1.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "browser-image-compression": "^2.0.2",
@@ -54,13 +56,13 @@
     "react-scripts": "5.0.1",
     "react-to-print": "^3.0.2",
     "recharts": "^3.1.2",
+    "serve": "^14.2.4",
     "sweetalert2": "^11.21.1",
     "victory": "^37.3.6",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5",
     "xlsx-js-style": "^1.2.0",
-    "xlsx-style": "^0.8.13",
-    "serve": "^14.2.4"
+    "xlsx-style": "^0.8.13"
   },
   "scripts": {
     "start": "serve -s build -l $PORT",
