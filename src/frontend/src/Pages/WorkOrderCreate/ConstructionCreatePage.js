@@ -199,19 +199,19 @@ function ConstructionCreatePage() {
           {/* ١ — بيانات أمر العمل */}
           <Section number={1} title="بيانات أمر العمل" subtitle="البيانات الأساسية الخاصة بقالب الإنشاءات.">
             <div className="wo-grid">
-              <Field label="رقم الطلب / رقم المهمة">
-                <input value={values.taskNumber} onChange={set("taskNumber")} />
-              </Field>
-
-              <Field label="رقم أمر العمل" required>
+              <Field label="رقم الطلب *" required>
                 <input value={values.faultNumber} onChange={set("faultNumber")} inputMode="numeric" />
               </Field>
 
-              <Field label="رمز أمر العمل">
-                <input value={values.workOrderCode} onChange={set("workOrderCode")} />
+              <Field label="وصف أمر العمل" required>
+                <input value={values.workDescription} onChange={set("workDescription")} placeholder="اختر وصف أمر العمل" />
               </Field>
 
-              <Field label="نوع/تصنيف العمل" required>
+              <Field label="رمز أمر العمل">
+                <input value={values.workOrderCode} onChange={set("workOrderCode")} placeholder="اختر رمز أمر العمل" />
+              </Field>
+
+              <Field label="نوع/تصنيف العمل *" required>
                 <select value={values.workOrderType} onChange={set("workOrderType")}>
                   <option value="">اختر النوع</option>
                   {lookups.types.map((t) => (
@@ -228,10 +228,16 @@ function ConstructionCreatePage() {
                 </select>
               </Field>
 
-              <Field
-                label="الجهد"
-                hint="يحدّد أي سلة من «تطبيقات LV / تطبيقات MV» تظهر لأمر العمل في المسار."
-              >
+              <Field label="وصف الاعمال *" required>
+                <select value={values.workOrderType} onChange={set("workOrderType")}>
+                  <option value="">اختر وصف الاعمال</option>
+                  {lookups.types.map((t) => (
+                    <option key={t.id} value={t.name}>{t.name}</option>
+                  ))}
+                </select>
+              </Field>
+
+              <Field label="الجهد">
                 <select value={values.voltageLevel} onChange={set("voltageLevel")}>
                   <option value="">اختر الجهد</option>
                   {VOLTAGES.map((v) => (
@@ -240,11 +246,7 @@ function ConstructionCreatePage() {
                 </select>
               </Field>
 
-              <Field label="وصف أمر العمل" required wide>
-                <textarea value={values.workDescription} onChange={set("workDescription")} rows={3} />
-              </Field>
-
-              <Field label="الإدارة" required>
+              <Field label="الإدارة *" required>
                 <select value={values.branchId} onChange={set("branchId")}>
                   <option value="">اختر الإدارة</option>
                   {lookups.branches.map((b) => (
@@ -253,7 +255,7 @@ function ConstructionCreatePage() {
                 </select>
               </Field>
 
-              <Field label="المكتب" required>
+              <Field label="المكتب *" required>
                 <select value={values.office} onChange={set("office")}>
                   <option value="">اختر المكتب</option>
                   {lookups.offices.map((o) => (
@@ -262,36 +264,15 @@ function ConstructionCreatePage() {
                 </select>
               </Field>
 
-              <Field label="الحي" required>
-                <select value={values.district} onChange={set("district")}>
-                  <option value="">اختر الحي</option>
-                  {lookups.districts.map((d) => (
-                    <option key={d.id} value={d.name}>{d.name}</option>
-                  ))}
-                </select>
-              </Field>
-
               <Field label="الموقع">
                 <input value={values.projectPlace} onChange={set("projectPlace")} placeholder="اختياري" />
-              </Field>
-
-              <Field label="رقم القطعة">
-                <input value={values.plotNumber} onChange={set("plotNumber")} />
               </Field>
 
               <Field label="رقم المخطط">
                 <input value={values.planNumber} onChange={set("planNumber")} />
               </Field>
 
-              <Field label="اسم المشترك">
-                <input value={values.subscriberName} onChange={set("subscriberName")} />
-              </Field>
-
-              <Field label="رقم المحطة">
-                <input value={values.stationNumber} onChange={set("stationNumber")} />
-              </Field>
-
-              <Field label="الاستشاري الرئيسي">
+              <Field label="الاستشاري الرئيسي *">
                 <select value={values.consultant} onChange={set("consultant")}>
                   <option value="">اختر الاستشاري الرئيسي</option>
                   {lookups.consultants.map((c) => (
@@ -302,8 +283,28 @@ function ConstructionCreatePage() {
                 </select>
               </Field>
 
-              {/* اسم المقاول بدل «الاستشاري المشرف» — الإشراف عندنا للاستشاري نفسه. */}
-              <Field label="اسم المقاول" required>
+              <Field label="رقم المحطة">
+                <input value={values.stationNumber} onChange={set("stationNumber")} />
+              </Field>
+
+              <Field label="اسم المشترك">
+                <input value={values.subscriberName} onChange={set("subscriberName")} placeholder="اكتب اسم المشترك" />
+              </Field>
+
+              <Field label="الحي *" required>
+                <select value={values.district} onChange={set("district")}>
+                  <option value="">اختر الحي</option>
+                  {lookups.districts.map((d) => (
+                    <option key={d.id} value={d.name}>{d.name}</option>
+                  ))}
+                </select>
+              </Field>
+
+              <Field label="رقم القطعة">
+                <input value={values.plotNumber} onChange={set("plotNumber")} />
+              </Field>
+
+              <Field label="اسم المقاول *" required>
                 <select value={values.contractor} onChange={set("contractor")}>
                   <option value="">اختر المقاول</option>
                   {lookups.contractors.map((c) => (
@@ -336,12 +337,12 @@ function ConstructionCreatePage() {
                 <input type="date" value={values.orderDate} onChange={set("orderDate")} />
               </Field>
 
-              <Field label="مدة التنفيذ (أيام)">
-                <input type="number" min="0" value={values.duration} onChange={set("duration")} />
-              </Field>
-
               <Field label="تاريخ التسليم المتوقع" hint="يُحسب من تاريخ الإسناد ومدة التنفيذ.">
                 <input value={expectedDelivery} readOnly className="wo-readonly" />
+              </Field>
+
+              <Field label="مدة التنفيذ (أيام)">
+                <input type="number" min="0" value={values.duration} onChange={set("duration")} />
               </Field>
 
               <Field label="تاريخ الاعتماد" hint="اختياري وليس إجبارياً عند الإنشاء.">
