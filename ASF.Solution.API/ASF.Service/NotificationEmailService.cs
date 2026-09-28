@@ -144,38 +144,42 @@ namespace ASF.Service
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <style>
-        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5; }}
-        .container {{ max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
-        .header {{ background: linear-gradient(135deg, #3385a0 0%, #2a6d8d 100%); color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px; }}
-        .content {{ color: #333; line-height: 1.6; }}
-        .mention-box {{ background-color: #e3f2fd; border-right: 4px solid #3385a0; padding: 15px; margin: 20px 0; border-radius: 4px; }}
-        .work-order-link {{ display: inline-block; background-color: #3385a0; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; margin: 20px 0; text-align: center; }}
+        body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5; padding: 20px 0; }}
+        .container {{ max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+        .logo {{ text-align: center; margin-bottom: 30px; font-size: 18px; color: #3385a0; font-weight: bold; }}
+        .content {{ color: #333; line-height: 1.8; font-size: 14px; }}
+        .content p {{ margin: 10px 0; }}
+        .message-box {{ background-color: #f9f9f9; border-right: 4px solid #3385a0; padding: 15px; margin: 20px 0; border-radius: 4px; font-style: italic; }}
+        .link-button {{ display: inline-block; background-color: #3385a0; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; margin: 20px 0; }}
         .footer {{ color: #999; font-size: 12px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; text-align: center; }}
-        .user-name {{ color: #3385a0; font-weight: bold; }}
+        .signature {{ margin-top: 30px; }}
     </style>
 </head>
 <body>
     <div class='container'>
-        <div class='header'>
-            <h2>تم ذكرك في أمر عمل</h2>
-            <p>نظام عصف الاستشاري</p>
-        </div>
+        <div class='logo'>نظام عصف الاستشاري</div>
 
         <div class='content'>
-            <p>السلام عليكم ورحمة الله وبركاته <strong>{mentionedUserName}</strong>,</p>
+            <p><strong>السيد: {mentionedUserName}</strong></p>
 
-            <p>لقد قام <span class='user-name'>{mentioningUserName}</span> بذكرك في تعليق على أمر العمل <strong>{workOrderTitle}</strong>.</p>
+            <p>مرحباً</p>
 
-            <div class='mention-box'>
-                <p><strong>التعليق:</strong></p>
-                <p>{commentContent}</p>
+            <p>أشار إليك <strong>السيد: {mentioningUserName}</strong></p>
+
+            <div class='message-box'>
+                \"{commentContent}\"
             </div>
 
-            <p>يمكنك الاطلاع على التفاصيل الكاملة من خلال الرابط أدناه:</p>
+            <p>في أمر العمل: <strong>{workOrderTitle}</strong></p>
 
-            <center>
-                <a href='https://asf-consulting.com/work-order/{workOrderId}' class='work-order-link'>عرض أمر العمل</a>
-            </center>
+            <p>نأمل اتخاذ اللازم</p>
+
+            <div class='signature'>
+                <p><a href='https://asf-consulting.com/work-order/{workOrderId}' class='link-button'>عرض أمر العمل</a></p>
+            </div>
+
+            <p>تحياتي</p>
+            <p><strong>نظام عصف الاستشاري</strong></p>
         </div>
 
         <div class='footer'>
@@ -219,20 +223,26 @@ namespace ASF.Service
         </div>
 
         <div class='content'>
-            <p>السلام عليكم ورحمة الله وبركاته <strong>{recipientName}</strong>,</p>
+            <p><strong>السيد: {recipientName}</strong></p>
 
-            <p>لقد قام <span class='user-name'>{replyAuthorName}</span> برد على تعليقك في أمر العمل <strong>{workOrderTitle}</strong>.</p>
+            <p>مرحباً</p>
+
+            <p>أشار إليك <strong>السيد: {replyAuthorName}</strong> برد على تعليقك</p>
 
             <div class='reply-box'>
-                <p><strong>الرد:</strong></p>
-                <p>{replyContent}</p>
+                \"{replyContent}\"
             </div>
 
-            <p>يمكنك الاطلاع على التعليقات والردود من خلال الرابط أدناه:</p>
+            <p>في أمر العمل: <strong>{workOrderTitle}</strong></p>
+
+            <p>نأمل اتخاذ اللازم</p>
 
             <center>
                 <a href='https://asf-consulting.com/work-order/{workOrderId}' class='work-order-link'>عرض التعليقات</a>
             </center>
+
+            <p>تحياتي</p>
+            <p><strong>نظام عصف الاستشاري</strong></p>
         </div>
 
         <div class='footer'>
