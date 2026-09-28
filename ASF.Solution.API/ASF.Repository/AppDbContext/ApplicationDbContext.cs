@@ -9,6 +9,7 @@ using ASF.Core.Entities.Emergency;
 using ASF.Core.Entities.Identity;
 using ASF.Core.Entities.Pricing;
 using ASF.Core.Entities.Workflow;
+using ASF.Core.Entities.WorkOrderActivity;
 
 
 namespace ASF.Repository.AppDbContext
@@ -66,6 +67,7 @@ namespace ASF.Repository.AppDbContext
                 .ToTable("OperationChangeForPrivateProject");
 
             ConfigureWorkflow(modelBuilder);
+            ConfigureWorkOrderActivity(modelBuilder);
 
             // آخر سطر - يضمن إنه يغلب أي إعداد سابق لـ AppUser
             modelBuilder.Entity<AppUser>(b =>
@@ -294,6 +296,13 @@ namespace ASF.Repository.AppDbContext
         public DbSet<ContractWorkOrderType> ContractWorkOrderTypes { get; set; }
         public DbSet<ContractTeamPermission> ContractTeamPermissions { get; set; }
 
+        // ─── سجل نشاط أمر العمل ─────────────────────────────────────────
+        public DbSet<WorkOrderActivity> WorkOrderActivities { get; set; }
+        public DbSet<WorkOrderComment> WorkOrderComments { get; set; }
+        public DbSet<WorkOrderMention> WorkOrderMentions { get; set; }
+        public DbSet<WorkOrderCommentAttachment> WorkOrderCommentAttachments { get; set; }
+        public DbSet<WorkOrderActivityReadStatus> WorkOrderActivityReadStatuses { get; set; }
+
         // ─────────── الربط بقوائم العقد عند الحفظ ───────────
         //
         // هنا لا في كل خدمة: أوامر العمل تُنشأ من مسارات كثيرة تمرّ كلّها
@@ -319,6 +328,199 @@ namespace ASF.Repository.AppDbContext
                 .GetAwaiter().GetResult();
 
             return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        /// <summary>
+        /// تكوين الجداول المرتبطة بسجل نشاط أمر العمل
+        /// </summary>
+        private static void ConfigureWorkOrderActivity(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<WorkOrderActivity>(b =>
+            {
+                b.HasKey(a => a.Id);
+                b.Property(a => a.Id).ValueGeneratedOnAdd();
+
+                // الفهارس للأداء
+                b.HasIndex(a => new { a.WorkOrderId, a.CreatedAt })
+                    .HasDatabaseName("IX_WorkOrderActivity_WorkOrderId_CreatedAt");
+
+                b.HasIndex(a => new { a.UserId, a.CreatedAt })
+                    .HasDatabaseName("IX_WorkOrderActivity_UserId_CreatedAt");
+
+                b.HasIndex(a => a.ActivityType)
+                    .HasDatabaseName("IX_WorkOrderActivity_ActivityType");
+
+                // الحقول المطلوبة
+                b.Property(a => a.WorkOrderId).IsRequired();
+                b.Property(a => a.ActivityType).IsRequired();
+                b.Property(a => a.UserId).IsRequired();
+                b.Property(a => a.CreatedAt).IsRequired();
+
+                // الملاحات
+                b.HasOne(a => a.User)
+                    .WithMany()
+                    .HasForeignKey(a => a.UserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                b.ToTable("WorkOrderActivities");
+            });
+
+            modelBuilder.Entity<WorkOrderComment>(b =>
+            {
+                b.HasKey(c => c.Id);
+                b.Property(c => c.Id).ValueGeneratedOnAdd();
+
+                // الفهارس
+                b.HasIndex(c => new { c.WorkOrderId, c.CreatedAt })
+                    .HasDatabaseName("IX_WorkOrderComment_WorkOrderId_CreatedAt");
+
+                b.HasIndex(c => c.CreatedByUserId)
+                    .HasDatabaseName("IX_WorkOrderComment_CreatedByUserId");
+
+                b.HasIndex(c => c.ParentCommentId)
+                    .HasDatabaseName("IX_WorkOrderComment_ParentCommentId");
+
+                // الحقول المطلوبة
+                b.Property(c => c.WorkOrderId).IsRequired();
+                b.Property(c => c.Content).IsRequired();
+                b.Property(c => c.CreatedByUserId).IsRequired();
+                b.Property(c => c.CreatedAt).IsRequired();
+
+                // الملاحات
+                b.HasOne(c => c.CreatedByUser)
+                    .WithMany()
+                    .HasForeignKey(c => c.CreatedByUserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasOne(c => c.UpdatedByUser)
+                    .WithMany()
+                    .HasForeignKey(c => c.UpdatedByUserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasOne(c => c.ParentComment)
+                    .WithMany(c => c.Replies)
+                    .HasForeignKey(c => c.ParentCommentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.HasMany(c => c.Mentions)
+                    .WithOne(m => m.Comment)
+                    .HasForeignKey(m => m.CommentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.HasMany(c => c.Attachments)
+                    .WithOne(a => a.Comment)
+                    .HasForeignKey(a => a.CommentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.ToTable("WorkOrderComments");
+            });
+
+            modelBuilder.Entity<WorkOrderMention>(b =>
+            {
+                b.HasKey(m => m.Id);
+                b.Property(m => m.Id).ValueGeneratedOnAdd();
+
+                // الفهارس
+                b.HasIndex(m => new { m.WorkOrderId, m.MentionedUserId })
+                    .HasDatabaseName("IX_WorkOrderMention_WorkOrderId_MentionedUserId");
+
+                b.HasIndex(m => m.CommentId)
+                    .HasDatabaseName("IX_WorkOrderMention_CommentId");
+
+                b.HasIndex(m => m.MentionedUserId)
+                    .HasDatabaseName("IX_WorkOrderMention_MentionedUserId");
+
+                // الحقول المطلوبة
+                b.Property(m => m.CommentId).IsRequired();
+                b.Property(m => m.WorkOrderId).IsRequired();
+                b.Property(m => m.MentionedUserId).IsRequired();
+                b.Property(m => m.CreatedByUserId).IsRequired();
+                b.Property(m => m.CreatedAt).IsRequired();
+
+                // الملاحات
+                b.HasOne(m => m.Comment)
+                    .WithMany(c => c.Mentions)
+                    .HasForeignKey(m => m.CommentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.HasOne(m => m.MentionedUser)
+                    .WithMany()
+                    .HasForeignKey(m => m.MentionedUserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasOne(m => m.CreatedByUser)
+                    .WithMany()
+                    .HasForeignKey(m => m.CreatedByUserId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasOne(m => m.Notification)
+                    .WithMany()
+                    .HasForeignKey(m => m.NotificationId)
+                    .OnDelete(DeleteBehavior.SetNull);
+
+                b.ToTable("WorkOrderMentions");
+            });
+
+            modelBuilder.Entity<WorkOrderCommentAttachment>(b =>
+            {
+                b.HasKey(a => a.Id);
+                b.Property(a => a.Id).ValueGeneratedOnAdd();
+
+                // الفهارس
+                b.HasIndex(a => a.CommentId)
+                    .HasDatabaseName("IX_WorkOrderCommentAttachment_CommentId");
+
+                b.HasIndex(a => a.WorkOrderId)
+                    .HasDatabaseName("IX_WorkOrderCommentAttachment_WorkOrderId");
+
+                // الحقول المطلوبة
+                b.Property(a => a.CommentId).IsRequired();
+                b.Property(a => a.WorkOrderId).IsRequired();
+                b.Property(a => a.FileName).IsRequired();
+                b.Property(a => a.FileType).IsRequired();
+                b.Property(a => a.FilePath).IsRequired();
+                b.Property(a => a.CreatedAt).IsRequired();
+
+                // الملاحات
+                b.HasOne(a => a.Comment)
+                    .WithMany(c => c.Attachments)
+                    .HasForeignKey(a => a.CommentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.ToTable("WorkOrderCommentAttachments");
+            });
+
+            modelBuilder.Entity<WorkOrderActivityReadStatus>(b =>
+            {
+                b.HasKey(r => r.Id);
+                b.Property(r => r.Id).ValueGeneratedOnAdd();
+
+                // الفهارس
+                b.HasIndex(r => new { r.ActivityId, r.UserId }).IsUnique()
+                    .HasDatabaseName("IX_WorkOrderActivityReadStatus_ActivityId_UserId");
+
+                b.HasIndex(r => new { r.WorkOrderId, r.UserId })
+                    .HasDatabaseName("IX_WorkOrderActivityReadStatus_WorkOrderId_UserId");
+
+                // الحقول المطلوبة
+                b.Property(r => r.ActivityId).IsRequired();
+                b.Property(r => r.WorkOrderId).IsRequired();
+                b.Property(r => r.UserId).IsRequired();
+                b.Property(r => r.ReadAt).IsRequired();
+
+                // الملاحات
+                b.HasOne(r => r.User)
+                    .WithMany()
+                    .HasForeignKey(r => r.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.HasOne(r => r.Activity)
+                    .WithMany()
+                    .HasForeignKey(r => r.ActivityId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                b.ToTable("WorkOrderActivityReadStatuses");
+            });
         }
     }
 }

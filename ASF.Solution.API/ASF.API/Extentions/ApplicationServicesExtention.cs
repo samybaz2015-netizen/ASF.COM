@@ -74,6 +74,9 @@ namespace ASF.Api.Extentions
             Services.AddScoped<IWorkOrderImportService, WorkOrderImportService>();
             Services.AddScoped<IEmployeeHubService, EmployeeHubService>();
 
+            // ─── سجل نشاط أمر العمل ─────────────────────────────────────────
+            Services.AddScoped<WorkOrderActivityService>();
+
             Services.AddHostedService<ConstructionUpdateService>();
 
 
