@@ -202,7 +202,11 @@ namespace ASF.Api.Controllers
                     request.WorkOrderId,
                     request.MentionedUserId,
                     userId,
-                    request.NotificationId
+                    request.NotificationId,
+                    request.MentionedUserEmail,
+                    request.MentionedUserName,
+                    request.CreatedByUserName,
+                    request.WorkOrderTitle
                 );
 
                 return Ok(mention);
@@ -324,6 +328,12 @@ namespace ASF.Api.Controllers
         public int WorkOrderId { get; set; }
         public string MentionedUserId { get; set; }
         public int? NotificationId { get; set; }
+
+        // بيانات إضافية لإرسال البريد الإلكتروني
+        public string MentionedUserEmail { get; set; }
+        public string MentionedUserName { get; set; }
+        public string CreatedByUserName { get; set; }
+        public string WorkOrderTitle { get; set; }
     }
 
     public class MarkMentionsAsReadRequest

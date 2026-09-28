@@ -16,10 +16,14 @@ namespace ASF.Service
     public class WorkOrderActivityService
     {
         private readonly ApplicationDbContext _context;
+        private readonly NotificationEmailService _emailService;
 
-        public WorkOrderActivityService(ApplicationDbContext context)
+        public WorkOrderActivityService(
+            ApplicationDbContext context,
+            NotificationEmailService emailService = null)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         /// <summary>
@@ -160,7 +164,11 @@ namespace ASF.Service
             int workOrderId,
             string mentionedUserId,
             string createdByUserId,
-            int? notificationId = null)
+            int? notificationId = null,
+            string mentionedUserEmail = null,
+            string mentionedUserName = null,
+            string createdByUserName = null,
+            string workOrderTitle = null)
         {
             var comment = _context.WorkOrderComments.FirstOrDefault(c => c.Id == commentId);
             if (comment == null)
@@ -196,6 +204,27 @@ namespace ASF.Service
                 null,
                 new { MentionedUserId = mentionedUserId, CommentId = commentId }
             );
+
+            // إرسال إشعار بريدي عند الذكر
+            if (_emailService != null && !string.IsNullOrEmpty(mentionedUserEmail))
+            {
+                try
+                {
+                    await _emailService.SendMentionNotificationAsync(
+                        mentionedUserEmail,
+                        mentionedUserName ?? mentionedUserId,
+                        createdByUserName ?? createdByUserId,
+                        comment.Content,
+                        workOrderId,
+                        workOrderTitle ?? $"أمر عمل #{workOrderId}"
+                    );
+                }
+                catch (Exception ex)
+                {
+                    // تسجيل الخطأ لكن لا نوقف العملية
+                    Console.WriteLine($"فشل إرسال بريد الذكر: {ex.Message}");
+                }
+            }
 
             return mention;
         }
